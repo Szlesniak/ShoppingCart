@@ -1,4 +1,4 @@
-package poprojekt.demo1;
+package poprojekt.Cart;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

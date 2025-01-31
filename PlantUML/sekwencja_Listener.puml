@@ -1,0 +1,33 @@
+@startuml
+actor User
+participant "GUI" as gui
+participant "Listener" as listener
+participant "Database" as db
+
+User -> gui: Uruchamia aplikację
+gui -> listener: Inicjalizuje listenera
+listener -> db: Sprawdza dostępność produktów
+db -> listener: Zwraca dostępne produkty
+listener -> gui: Odświeża GUI z produktami
+
+== Sprawdzenie stanu produktu ==
+
+listener -> db: Sprawdza ilość produktu w bazie
+db -> listener: Zwraca ilość produktu
+alt Ilość produktu = 0
+    listener -> db: Usuwa produkt z bazy danych
+    db -> listener: Produkt usunięty
+    listener -> gui: Odświeża GUI (usunięty produkt)
+end
+
+== Sprawdzenie koszyka na anonimowym koncie ==
+
+listener -> db: Sprawdza stan koszyka anonimowego użytkownika
+db -> listener: Zwraca przedmioty w koszyku
+alt Przedmioty w koszyku przez długi czas
+    listener -> db: Czyści koszyk
+    db -> listener: Koszyk wyczyszczony
+    listener -> gui: Informuje GUI o wyczyszczeniu koszyka
+end
+
+@enduml

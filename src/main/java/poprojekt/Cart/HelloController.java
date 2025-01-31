@@ -1,4 +1,4 @@
-package poprojekt.demo1;
+package poprojekt.Cart;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

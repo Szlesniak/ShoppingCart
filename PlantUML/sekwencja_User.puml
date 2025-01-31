@@ -1,0 +1,33 @@
+@startuml
+title Diagram Sekwencji dla Koszyka Zakupowego Online
+
+actor User
+entity Gui
+entity DataBase
+
+' Użytkownik przegląda produkty
+User -> Gui : Wyświetlanie produktów
+Gui -> DataBase : Pobierz listę produktów
+DataBase -> Gui : Lista produktów
+Gui -> User : Wyświetl produkty
+
+' Użytkownik wybiera produkt i dodaje do koszyka
+User -> Gui : Wybór produktów
+Gui -> DataBase : Zaktualizuj koszyk (dodanie)
+DataBase -> Gui : Potwierdzenie aktualizacji
+Gui -> User : Potwierdzenie dodania do koszyka
+
+' Użytkownik wprowadza dane osobowe
+User -> Gui : Wprowadzenie danych osobowych
+Gui -> DataBase : Zapisz dane osobowe
+DataBase -> Gui : Potwierdzenie zapisu
+Gui -> User : Potwierdzenie zapisania danych
+
+' Użytkownik wybiera sposób dostawy i płatności
+User -> Gui : Wybór metody dostawy i płatności
+Gui -> DataBase : Zapisz metodę dostawy i płatności
+DataBase -> Gui : Potwierdzenie zapisu
+Gui -> User : Potwierdzenie wyboru
+
+@enduml
+

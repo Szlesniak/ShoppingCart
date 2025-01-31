@@ -1,8 +1,8 @@
-module poprojekt.demo1 {
+module poprojekt.Cart {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens poprojekt.demo1 to javafx.fxml;
-    exports poprojekt.demo1;
+    opens poprojekt.Cart to javafx.fxml;
+    exports poprojekt.Cart;
 }

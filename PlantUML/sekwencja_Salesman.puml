@@ -1,0 +1,33 @@
+@startuml
+title Diagram Sekwencji dla Koszyka Zakupowego Online
+
+actor Salesman
+entity Gui
+entity DataBase
+
+' Sprzedawca dodaje produkt do sklepu
+Salesman -> Gui : Dodanie produktu do sklepu
+Gui -> DataBase : Dodaj produkt do bazy
+DataBase -> Gui : Potwierdzenie dodania produktu
+Gui -> Salesman : Potwierdzenie dodania produktu
+
+' Sprzedawca sprawdza przychody
+Salesman -> Gui : Sprawdzenie przychodów
+Gui -> DataBase : Pobierz dane o przychodach
+DataBase -> Gui : Lista przychodów
+Gui -> Salesman : Wyświetl przychody
+
+' Sprzedawca sprawdza ilość kupionych produktów
+Salesman -> Gui : Sprawdzenie ilości kupionych produktów
+Gui -> DataBase : Pobierz dane o ilości
+DataBase -> Gui : Ilość kupionych produktów
+Gui -> Salesman : Wyświetl ilość
+
+' Sprzedawca uzupełnia zapasy
+Salesman -> Gui : Uzupełnienie zapasów produktu
+Gui -> DataBase : Zaktualizuj ilość produktów
+DataBase -> Gui : Potwierdzenie aktualizacji
+Gui -> Salesman : Potwierdzenie uzupełnienia zapasów
+
+@enduml
+

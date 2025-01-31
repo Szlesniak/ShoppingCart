@@ -1,0 +1,61 @@
+@startuml
+title Diagram Klas dla Koszyka Zakupowego Online
+
+class Product {
+  +String name
+  +String description
+  +float price
+  +int stock
+  +addProduct()
+  +updateStock()
+}
+
+class User {
+  +String name
+  +String email
+  +String address
+  +Cart cart
+  +Order order
+  +addToCart(product: Product)
+  +removeFromCart(product: Product)
+  +checkout()
+}
+
+class Cart {
+  +List<Product> products
+  +float totalPrice()
+  +addProduct(product: Product)
+  +removeProduct(product: Product)
+}
+
+class Order {
+  +String deliveryMethod
+  +String paymentMethod
+  +float totalAmount
+  +placeOrder()
+  +updateStatus()
+}
+
+class Salesman {
+  +String name
+  +String employeeId
+  +addProduct(product: Product)
+  +updateProductStock(product: Product, amount: int)
+  +viewSales()
+  +viewPurchasedItems()
+}
+
+Interface Listener {
+    +addListener()
+    +deleteListener()
+    +notifyListener()
+}
+
+Product --> Cart : contains
+Cart --> User : owned by
+User --> Order : creates
+Salesman --> Product : manages
+Listener --> Cart : supervises
+Listener --> Product : supervises
+
+@enduml

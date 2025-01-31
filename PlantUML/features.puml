@@ -1,0 +1,32 @@
+@startuml
+title Koszyk Zakupowy Online
+
+skinparam actorStyle awesome
+
+actor "USER" as User
+actor "SALESMAN" as Salesman
+actor "LISTENER" as Listener
+
+left to right direction
+
+rectangle "Koszyk Zakupowy Online" {
+  User --> (Przeglądanie sklepu)
+  User --> (Wybieranie produktów)
+  User --> (Wprowadzanie danych osobowych)
+  User --> (Wybór sposobu dostawy i płatności)
+}
+
+rectangle "Sprzedawca" {
+  Salesman --> (Dodawanie produktów)
+  Salesman --> (Sprawdzanie przychodu)
+  Salesman --> (Ilość kupionych przedmiotów)
+  Salesman --> (Uzupełnianie ilości)
+}
+
+rectangle "LISTERNER" {
+  Listener --> (Aktualizuje koszyk)
+  Listener --> (Aktualizuje produkty)
+  Listener --> (Update GUI)
+}
+
+@enduml
