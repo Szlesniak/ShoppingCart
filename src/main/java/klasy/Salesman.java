@@ -1,4 +1,4 @@
 package klasy;
 
-public class Salesman {
+public class Salesman extends Dane {
 }

@@ -1,21 +1,21 @@
 package klasy;
 
-public class User {
+public class User extends Dane {
+    private String firma;
     private String name;
     private String surname;
-    private String email;
-    private String address;
     private String phone;
-    private String login;
-    private String password;
-    public User(String name, String surname, String email, String address, String phone, String login, String password) {
+    public User(String password, String login , String firma,String name, String surname, String email, String phone, String miasto, String ulica, String nr_bud) {
+        this.password = password;
+        this.login = login;
+        this.firma = firma;
         this.name = name;
         this.surname = surname;
         this.email = email;
-        this.address = address;
         this.phone = phone;
-        this.login = login;
-        this.password = password;
+        this.miasto = miasto;
+        this.ulica = ulica;
+        this.nr_bud = nr_bud;
     }
 }
 

@@ -140,7 +140,7 @@
                                                 <Insets left="20.0" />
                                              </HBox.margin>
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font></Label>
                                           <TextField />
                                        </children>
@@ -163,6 +163,16 @@
                                           </Label>
                                           <TextField />
                                        </children></HBox>
+                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+                                       <children>
+                                          <Label text="E-mail: ">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <TextField />
+                                       </children>
+                                    </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
                                           <Label text="Nr. konta bankowego: ">
