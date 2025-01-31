@@ -7,7 +7,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label layoutX="300.0" layoutY="14.0" text="Zarejestruj się jako:">
+      <Label layoutX="320.0" layoutY="14.0" text="Zarejestruj się...">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
