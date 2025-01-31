@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Nazwa Produktu" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <HBox prefHeight="170.0" prefWidth="150.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin></ImageView>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
+               <children>
+                  <Label text="Krótki Opis" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="70.0">
+               <children>
+                  <Label text="Ilość" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField maxWidth="50.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></TextField>
+                  <Label text="Cena" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField maxWidth="50.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="99.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Usuń z koszyka">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></Button>
+                  <TextField maxWidth="50.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="120.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Podsumowanie" textAlignment="CENTER" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
