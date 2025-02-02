@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.LoginController">
    <children>
       <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="575.0" prefWidth="775.0" style="-fx-background-color: #C1FFC1;">
          <children>
-            <Label text="Zaloguj się...">
+            <Label prefHeight="24.0" prefWidth="130.0" text="Zaloguj się...">
                <font>
                   <Font name="System Bold" size="22.0" />
                </font>
@@ -22,7 +22,7 @@
                <children>
                   <Label text="Podaj login: ">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <TextField />
@@ -32,7 +32,7 @@
                <children>
                   <Label text="Podaj hasło: ">
                      <font>
-                        <Font size="18.0" />
+                        <Font name="System Bold" size="18.0" />
                      </font>
                   </Label>
                   <TextField />
@@ -40,7 +40,10 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Label text="Nie masz jeszcze konta?" />
+                  <Label text="Nie masz jeszcze konta?">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
                   <Button mnemonicParsing="false" text="Zarejestruj się">
                      <HBox.margin>
                         <Insets left="20.0" />

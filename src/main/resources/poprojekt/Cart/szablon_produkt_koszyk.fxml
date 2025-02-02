@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="600.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Nazwa Produktu" textAlignment="CENTER">
          <font>
@@ -22,12 +22,7 @@
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin></ImageView>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="150.0">
-               <children>
-                  <Label text="Krótki Opis" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="70.0">
+            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="170.0">
                <children>
                   <Label text="Ilość" textAlignment="CENTER">
                      <VBox.margin>
@@ -36,7 +31,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField maxWidth="50.0">
+                  <TextField alignment="CENTER" editable="false" maxWidth="50.0">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
@@ -47,21 +42,28 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField maxWidth="50.0" />
+                  <TextField alignment="CENTER" editable="false" maxWidth="50.0" />
                </children>
             </VBox>
-            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="99.0">
+            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="170.0">
                <children>
+                  <Label text="Ilość do usunięcia">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField alignment="CENTER" maxWidth="50.0" prefWidth="50.0" promptText="1">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </TextField>
                   <Button mnemonicParsing="false" text="Usuń z koszyka">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></Button>
-                  <TextField maxWidth="50.0" />
-               </children>
-            </VBox>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="120.0">
-               <children>
-                  <Button mnemonicParsing="false" text="Podsumowanie" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>

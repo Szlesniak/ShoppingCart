@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label text="Nazwa Produktu" textAlignment="CENTER">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </Label>
+      <HBox prefHeight="170.0" prefWidth="150.0">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin></ImageView>
+            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="105.0">
+               <children>
+                  <Label prefHeight="50.0" prefWidth="85.0" text="Dostępna Ilość" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField alignment="CENTER" editable="false" maxWidth="50.0" minWidth="30.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></TextField>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="120.0">
+               <children>
+                  <Label text="Ilość sprzedana" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField alignment="CENTER" editable="false" maxWidth="50.0">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></TextField>
+                  <Label text="Zarobek" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font></Label>
+                  <TextField alignment="CENTER" editable="false" maxWidth="50.0" />
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="170.0" prefWidth="120.0">
+               <children>
+                  <GridPane alignment="CENTER" nodeOrientation="LEFT_TO_RIGHT">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Dodaj" textAlignment="CENTER" GridPane.rowIndex="2" />
+                        <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" text="Zmień" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="50.0" text="Ilość">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="50.0" text="Cena" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                        <TextField maxWidth="50.0" prefHeight="25.0" prefWidth="50.0" GridPane.rowIndex="1" />
+                        <TextField maxWidth="50.0" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</VBox>
