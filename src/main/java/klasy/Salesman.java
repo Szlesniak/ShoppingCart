@@ -7,7 +7,7 @@ public class Salesman extends Dane {
     String company;
     String NIP;
     String nr_konta;
-    ArrayList<Product> Products = new ArrayList<Product>() ;
+    ArrayList<Product> SalesmanProducts = new ArrayList<Product>() ;
     public Salesman(String name, String company, String NIP, String nr_konta, String login, String password, String miasto, String ulica, String nr_bud, String email){
         this.password = password;
         this.login = login;
@@ -21,7 +21,7 @@ public class Salesman extends Dane {
         this.nr_konta = nr_konta;
     }
     public void addProduct(Product product){
-        Products.add(product);
+        SalesmanProducts.add(product);
     }
 
 
