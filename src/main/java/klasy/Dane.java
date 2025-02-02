@@ -7,4 +7,5 @@ public abstract class Dane {
     public String ulica;
     public String nr_bud;
     public String email;
+    public String phone;
 }
