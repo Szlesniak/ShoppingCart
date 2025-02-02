@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" spacing="20.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SalesmanController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="30.0" prefWidth="800.0">
+         <children>
+            <Label prefHeight="27.0" prefWidth="250.0" text="Koszyk Zakupowy Online" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="270.0" />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" text="Wyloguj się">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <TextField alignment="CENTER" editable="false" maxWidth="120.0" text="Username">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></TextField>
+         </children>
+      </HBox>
+      <SplitPane dividerPositions="0.29797979797979796" prefHeight="500.0" prefWidth="200.0">
+        <items>
+          <AnchorPane maxWidth="500.0" minHeight="0.0" minWidth="500.0" style="-fx-background-color: #C1FFC1;" SplitPane.resizableWithParent="false">
+               <children>
+                  <ScrollPane prefHeight="500.0" prefWidth="506.0">
+                    <content>
+                      <AnchorPane />
+                    </content>
+                  </ScrollPane>
+               </children></AnchorPane>
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #C1FFC1;" SplitPane.resizableWithParent="false">
+               <children>
+                  <GridPane layoutY="99.0" prefHeight="300.0" prefWidth="252.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label alignment="CENTER" prefHeight="43.0" prefWidth="126.0" text="Ilość sprzedanych produktów" textAlignment="CENTER" wrapText="true">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="126.0" text="Łączna kwota zarobiona" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="126.0" text="Ilość unikalnych produktów" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                        <TextField maxWidth="120.0" GridPane.columnIndex="1" />
+                        <TextField maxWidth="120.0" minWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Label layoutX="40.0" layoutY="64.0" text="Podsumowanie">
+                     <font>
+                        <Font name="System Bold" size="24.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="80.0" layoutY="399.0" mnemonicParsing="false" text="Dodaj produkt" />
+               </children></AnchorPane>
+        </items>
+      </SplitPane>
+   </children>
+</VBox>

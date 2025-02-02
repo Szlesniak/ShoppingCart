@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox alignment="CENTER" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" spacing="20.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.UserController">
+  <padding>
+    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+  </padding>
+   <children>
+      <HBox alignment="CENTER_LEFT" fillHeight="false" prefHeight="30.0" prefWidth="800.0">
+         <children>
+            <Label prefHeight="27.0" prefWidth="250.0" text="Koszyk Zakupowy Online" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="200.0" />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" text="Koszyk">
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Button>
+            <TextField alignment="CENTER" maxWidth="30.0">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </TextField>
+            <Button mnemonicParsing="false" text="Wyloguj się">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <TextField alignment="CENTER" editable="false" maxWidth="120.0" text="Username">
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin></TextField>
+         </children>
+      </HBox>
+      <ScrollPane maxWidth="760.0" minHeight="500.0" style="-fx-background-color: #C1FFC1;" />
+   </children>
+</VBox>

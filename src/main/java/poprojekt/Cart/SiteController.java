@@ -7,7 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import klasy.Product;
 
-public class KoszykController {
+public class SiteController {
     @FXML
     private ListView<Product> productList;
     ObservableList<Product> products = FXCollections.observableArrayList();

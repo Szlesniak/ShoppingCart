@@ -5,18 +5,18 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.RegisterController">
    <children>
       <Label layoutX="320.0" layoutY="14.0" text="Zarejestruj się...">
          <font>
             <Font name="System Bold" size="22.0" />
          </font>
       </Label>
-      <TabPane layoutX="14.0" layoutY="81.0" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="775.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane layoutX="14.0" layoutY="81.0" maxHeight="500.0" minHeight="500.0" prefHeight="500.0" prefWidth="775.0" tabClosingPolicy="UNAVAILABLE" tabMaxWidth="300.0" tabMinWidth="367.0">
         <tabs>
           <Tab text="Użytkownik">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="500.0" prefWidth="775.0" style="-fx-background-color: #C1FFC1;">
+              <AnchorPane style="-fx-background-color: #C1FFC1;">
                      <children>
                         <VBox alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="450.0" prefWidth="750.0">
                            <children>
@@ -30,7 +30,7 @@
                                     <TextField />
                                     <Label text="Hasło: ">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="20.0" />
@@ -43,7 +43,7 @@
                                  <children>
                                     <Label text="Imię: ">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
                                     <TextField />
@@ -52,7 +52,7 @@
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
                                     <TextField />
@@ -61,7 +61,7 @@
                                  <children>
                                     <Label text="E-mail: ">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font></Label>
                                     <TextField />
                                  </children></HBox>
@@ -69,7 +69,7 @@
                                  <children>
                                     <Label text="Telefon: ">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font></Label>
                                     <TextField />
                                  </children></HBox>
@@ -77,7 +77,7 @@
                                  <children>
                                     <Label text="Miasto: ">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
                                     <TextField />
@@ -93,7 +93,7 @@
                                     <TextField />
                                     <Label text="Nr. budynku: ">
                                        <font>
-                                          <Font size="18.0" />
+                                          <Font name="System Bold" size="18.0" />
                                        </font>
                                        <HBox.margin>
                                           <Insets left="20.0" />
@@ -103,7 +103,7 @@
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" mnemonicParsing="false" text="Zarejestruj Się" textAlignment="CENTER">
+                                    <Button alignment="CENTER" mnemonicParsing="false" text="Zarejestruj się" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets right="30.0" />
                                        </HBox.margin>
@@ -122,11 +122,11 @@
           </Tab>
           <Tab text="Sprzedawca">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #C1FFC1;">
+              <AnchorPane style="-fx-background-color: #C1FFC1;">
                      <children>
-                        <Pane layoutX="14.0" layoutY="14.0" prefHeight="445.0" prefWidth="745.0">
+                        <Pane layoutX="14.0" layoutY="14.0" prefHeight="450.0" prefWidth="750.0">
                            <children>
-                              <VBox prefHeight="445.0" prefWidth="745.0">
+                              <VBox prefHeight="450.0" prefWidth="750.0">
                                  <children>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -149,13 +149,13 @@
                                        <children>
                                           <Label text="Nazwa firmy: ">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
                                           <TextField />
                                           <Label text="Numer NIP: ">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                              <padding>
                                                 <Insets left="20.0" />
@@ -167,7 +167,7 @@
                                        <children>
                                           <Label text="E-mail: ">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
                                           <TextField />
@@ -175,12 +175,12 @@
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Label text="Nr. konta bankowego: ">
+                                          <Label text="Telefon: ">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField maxWidth="250.0" minWidth="300.0" />
+                                          <TextField />
                                        </children></HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -195,13 +195,13 @@
                                        <children>
                                           <Label text="Ulica: ">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
                                           <TextField />
                                           <Label text="Nr. budynku: ">
                                              <font>
-                                                <Font size="18.0" />
+                                                <Font name="System Bold" size="18.0" />
                                              </font>
                                              <padding>
                                                 <Insets left="20.0" />

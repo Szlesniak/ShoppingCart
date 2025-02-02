@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.ProductController">
+   <children>
+      <VBox alignment="CENTER" layoutX="13.0" layoutY="13.0" prefHeight="575.0" prefWidth="775.0" style="-fx-background-color: #C1FFC1;">
+         <children>
+            <Label text="Dodaj produkt...">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Label>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Nazwa: ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <TextField prefHeight="25.0" prefWidth="200.0" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Ilość: ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <TextField prefHeight="25.0" prefWidth="150.0">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </TextField>
+                  <Label text="Cena: ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <TextField prefHeight="25.0" prefWidth="150.0" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Opis (300 znaków max): ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <TextArea maxHeight="80.0" prefHeight="50.0" prefWidth="500.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non eros lobortis purus lobortis venenatis et vulputate tellus. In non odio tellus. Quisque porttitor tellus non eros posuere, et efficitur magna iaculis. Duis sollicitudin mi vitae viverra semper. Aenean tincidunt convallis mi eu laoreet." wrapText="true" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label text="Nazwa zdjęcia: ">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font></Label>
+                  <TextField prefHeight="25.0" prefWidth="201.0" />
+               </children></HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" text="Dodaj produkt">
+                     <HBox.margin>
+                        <Insets right="20.0" />
+                     </HBox.margin></Button>
+                  <Button mnemonicParsing="false" text="Anuluj">
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin></Button>
+               </children></HBox>
+         </children></VBox>
+   </children>
+</Pane>
