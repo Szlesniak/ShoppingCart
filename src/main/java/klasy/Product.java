@@ -2,7 +2,7 @@ package klasy;
 
 public class Product {
     private int id;
-    private String name;
+    public String name;
     private double price;
     private int amount = 0;
     public Product(int id, String name, double price, int amount) {
