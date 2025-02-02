@@ -20,8 +20,14 @@ public class Product {
     public double getPrice() {
         return price;
     }
+    public void setPrice(int newprice){
+        price = newprice;
+    }
     public int getAmount() {
         return amount;
+    }
+    public void setAmount(int newAmount){
+        amount = newAmount;
     }
     public double getTotalPrice() {
         return price * amount;
