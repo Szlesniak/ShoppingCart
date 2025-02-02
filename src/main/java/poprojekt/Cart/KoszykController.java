@@ -14,6 +14,6 @@ public class KoszykController {
 
     @FXML
     public void initialize() {
-        productList.setItems(products);
+//        productList.setItems(products);
     }
 }
