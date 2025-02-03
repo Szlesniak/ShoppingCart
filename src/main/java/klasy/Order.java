@@ -5,11 +5,25 @@ import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.io.IOException;
 
-public class Order {
+public class Order extends Cart {
     public String orderID;
-    public Cart cart;
-    public Order(int orderID, Cart cart){
+    public User user;
+    public boolean finalized;
+    public Order(int orderID, User user){
+        this.user = user;
+    }
+    public void setFinalized(boolean something){
+        finalized = something;
+    }
+    public boolean isFinalized(){
+        return finalized;    }
 
+    public void finalizeOrder() {
+        for (Product product : user.cart.getProducts()) {
+            product.decreaseStock(product.getBought()); // Odejmujemy zakupioną ilość
+        }
+        user.cart.clearCart(); // Czyścimy koszyk po zakupie
+        System.out.println("Zamówienie zrealizowane! Ilość produktów w magazynie zaktualizowana.");
     }
 
     public String getOrderId() {
@@ -35,7 +49,7 @@ public class Order {
             contentStream.newLineAtOffset(0, -15);
 
             // Produkty
-            for (Product item : order.cart.getProducts()) {
+            for (Product item : order.user.cart.getProducts()) {
                 String row = String.format("%s\t%d\t%.2f zł",
                         item.getName(),
                         item.getBought(),
@@ -47,7 +61,7 @@ public class Order {
 
             // Suma
             contentStream.newLineAtOffset(0, -30);
-            contentStream.showText("Suma: " + String.format("%.2f zł", order.cart.getTotalPrice()));
+            contentStream.showText("Suma: " + String.format("%.2f zł", order.user.cart.getTotalPrice()));
             contentStream.endText();
 
             contentStream.close();
