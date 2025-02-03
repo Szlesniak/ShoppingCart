@@ -33,4 +33,18 @@ public class Salesman extends Dane {
     public ArrayList<Product> getSalesmanProducts() {
         return SalesmanProducts;
     }
+    public int getTotalSold(){
+        int total = 0;
+        for (Product product : SalesmanProducts){
+            total += product.sold;
+        }
+        return total;
+    }
+    public double getTotalMoney(){
+        double total = 0;
+        for (Product product : SalesmanProducts){
+            total += product.getTotalPrice();
+        }
+        return total;
+    }
 }

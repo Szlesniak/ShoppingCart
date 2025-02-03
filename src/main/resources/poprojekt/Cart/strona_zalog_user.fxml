@@ -17,19 +17,14 @@
                   <Font name="System Bold" size="18.0" />
                </font>
                <HBox.margin>
-                  <Insets right="200.0" />
+                  <Insets right="230.0" />
                </HBox.margin>
             </Label>
-            <Button mnemonicParsing="false" text="Koszyk">
+            <Button mnemonicParsing="false" onAction="#Koszyk" text="Koszyk">
                <HBox.margin>
                   <Insets />
                </HBox.margin>
             </Button>
-            <TextField alignment="CENTER" maxWidth="30.0">
-               <HBox.margin>
-                  <Insets left="10.0" />
-               </HBox.margin>
-            </TextField>
             <Button mnemonicParsing="false" onAction="#logout" text="Wyloguj się">
                <HBox.margin>
                   <Insets left="10.0" />

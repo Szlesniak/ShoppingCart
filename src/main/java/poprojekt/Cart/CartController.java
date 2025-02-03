@@ -33,27 +33,25 @@ public class CartController {
     User currentuser;
     DataManager dataManager = DataManager.getInstance();
 
-    String deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
-    String paymentMethod = platnosc.getSelectionModel().getSelectedItem();
-
     private static ObservableList<Product> productsList = FXCollections.observableArrayList();
 
     public void initialize() {
         platnosc.getItems().addAll(paymentMethod1, paymentMethod2, paymentMethod3);
         dostawa.getItems().addAll(deliveryMethod1, deliveryMethod2, deliveryMethod3);
+        currentuser = dataManager.getCurrentUser();
         productsList = currentuser.cart.getProducts();
         currentuser = dataManager.getCurrentUser();
-        for (Product product : productsList) {
-            addProductToUI(product);
-        }
+        refresh();
+        String deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
+        String paymentMethod = platnosc.getSelectionModel().getSelectedItem();
     }
     private void addProductToUI(Product product) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("szablon_produkt_koszyk.fxml"));
             Parent productNode = loader.load();
 
-            SzablonController controller = loader.getController();
-            controller.setProductData(product.getName(),product.getDescription(), product.getPrice(), product.getAmount(), product.getPhoto() );
+            SzablonKoszController controller = loader.getController();
+            controller.setProductData(product.getName(), product.getBought(), product.getPrice(), product.getPhoto() );
 
             contentBox.getChildren().add(productNode);
         } catch (IOException e) {
@@ -63,8 +61,18 @@ public class CartController {
 
     public void order() {
 
+        clearcart();
     }
     public void clearcart() {
         currentuser.cart.clearCart();
+        refresh();
+    }
+    public void refresh() {
+        contentBox.getChildren().clear();
+        productsList = currentuser.cart.getProducts();
+        for (Product product : productsList) {
+            addProductToUI(product);
+        }
+        prize.setText(Double.toString(currentuser.cart.getTotalPrice()));
     }
 }

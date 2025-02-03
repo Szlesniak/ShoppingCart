@@ -68,9 +68,9 @@
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font></Label>
-                        <TextField maxWidth="120.0" GridPane.columnIndex="1" />
-                        <TextField maxWidth="120.0" minWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="solld" maxWidth="120.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="money" maxWidth="120.0" minWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="unique" maxWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <Label layoutX="40.0" layoutY="64.0" text="Podsumowanie">

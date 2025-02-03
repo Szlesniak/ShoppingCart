@@ -23,6 +23,12 @@ public class SalesmanController {
     @FXML
     private TextField username;
     @FXML
+    private TextField solld;
+    @FXML
+    private TextField money;
+    @FXML
+    private TextField unique;
+    @FXML
     private VBox contentBox;
     @FXML
     public void onAddProduct() {
@@ -95,6 +101,9 @@ public class SalesmanController {
         for (Product product1 : salesman.getSalesmanProducts()) {
             addProductToUI(product1);
         }
+        solld.setText(Double.toString(salesman.getTotalSold()));
+        money.setText(Double.toString(salesman.getTotalMoney()));
+        unique.setText(Integer.toString(salesman.getSalesmanProducts().size()));
     }
     public void wiadomosc(String wiadomosc) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

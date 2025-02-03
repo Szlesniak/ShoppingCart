@@ -8,7 +8,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -23,15 +22,14 @@ public class UserController {
     @FXML
     private VBox contentBox;
 
+
     DataManager dataManager = DataManager.getInstance();
     private static ObservableList<Product> productsList = FXCollections.observableArrayList();
 
     public void initialize() {
         productsList = dataManager.shareProductList();
         username.setText(dataManager.getCurrentUser().getLogin());
-        for (Product product : productsList) {
-            addProductToUI(product);
-        }
+        refresh();
     }
 
     public void logout(ActionEvent event) {
@@ -65,6 +63,25 @@ public class UserController {
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public void Koszyk(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("koszyk.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    void refresh(){
+        contentBox.getChildren().clear();
+        for (Product product : productsList) {
+            addProductToUI(product);
         }
     }
 }
