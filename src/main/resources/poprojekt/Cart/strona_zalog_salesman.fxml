@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" spacing="20.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SalesmanController">
+<VBox alignment="CENTER" maxHeight="600.0" maxWidth="800.0" minHeight="600.0" minWidth="800.0" spacing="20.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SalesmanController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
@@ -78,7 +78,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Button layoutX="80.0" layoutY="399.0" mnemonicParsing="false" text="Dodaj produkt" />
+                  <Button onAction="#onAddProduct" layoutX="80.0" layoutY="399.0" mnemonicParsing="false" text="Dodaj produkt" />
                </children></AnchorPane>
         </items>
       </SplitPane>

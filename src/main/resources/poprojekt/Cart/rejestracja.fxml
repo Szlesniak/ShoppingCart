@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.RegisterController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.RegisterController">
    <children>
       <Label layoutX="320.0" layoutY="14.0" text="Zarejestruj się...">
          <font>
@@ -27,7 +27,7 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField />
+                                    <TextField fx:id="userLogin" />
                                     <Label text="Hasło: ">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
@@ -36,7 +36,7 @@
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField />
+                                    <PasswordField fx:id="userPasswd" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -46,7 +46,7 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField />
+                                    <TextField fx:id="userName" />
                                     <Label text="Nazwisko: ">
                                        <HBox.margin>
                                           <Insets left="20.0" />
@@ -55,7 +55,7 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField />
+                                    <TextField fx:id="userSurname" />
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
@@ -63,7 +63,7 @@
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font></Label>
-                                    <TextField />
+                                    <TextField fx:id="userEmail" />
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
@@ -71,7 +71,7 @@
                                        <font>
                                           <Font name="System Bold" size="18.0" />
                                        </font></Label>
-                                    <TextField />
+                                    <TextField fx:id="userPhone" />
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
@@ -80,7 +80,7 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField />
+                                    <TextField fx:id="userCity" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -90,7 +90,7 @@
                                           <Font name="System Bold" size="18.0" />
                                        </font>
                                     </Label>
-                                    <TextField />
+                                    <TextField fx:id="userRoad" />
                                     <Label text="Nr. budynku: ">
                                        <font>
                                           <Font name="System Bold" size="18.0" />
@@ -99,16 +99,16 @@
                                           <Insets left="20.0" />
                                        </HBox.margin>
                                     </Label>
-                                    <TextField />
+                                    <TextField fx:id="userNr" />
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button alignment="CENTER" mnemonicParsing="false" text="Zarejestruj się" textAlignment="CENTER">
+                                    <Button onAction="#userRegister" alignment="CENTER" mnemonicParsing="false" text="Zarejestruj się" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets right="30.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button alignment="CENTER" mnemonicParsing="false" text="Anuluj" textAlignment="CENTER">
+                                    <Button onAction="#cancel" alignment="CENTER" mnemonicParsing="false" text="Anuluj" textAlignment="CENTER">
                                        <HBox.margin>
                                           <Insets left="30.0" />
                                        </HBox.margin>
@@ -134,7 +134,7 @@
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font></Label>
-                                          <TextField />
+                                          <TextField fx:id="saleLogin" />
                                           <Label text="Hasło: ">
                                              <HBox.margin>
                                                 <Insets left="20.0" />
@@ -142,7 +142,7 @@
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
                                              </font></Label>
-                                          <TextField />
+                                          <PasswordField fx:id="salePasswd" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -152,7 +152,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="saleCompany" />
                                           <Label text="Numer NIP: ">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
@@ -161,7 +161,7 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="saleNIP" />
                                        </children></HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -170,7 +170,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="saleEmail" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
@@ -180,7 +180,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="salePhone" />
                                        </children></HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -189,7 +189,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="saleCity" />
                                        </children></HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
@@ -198,7 +198,7 @@
                                                 <Font name="System Bold" size="18.0" />
                                              </font>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="saleRoad" />
                                           <Label text="Nr. budynku: ">
                                              <font>
                                                 <Font name="System Bold" size="18.0" />
@@ -207,17 +207,17 @@
                                                 <Insets left="20.0" />
                                              </padding>
                                           </Label>
-                                          <TextField />
+                                          <TextField fx:id="saleNr" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                        <children>
-                                          <Button mnemonicParsing="false" text="Zarejestruj się">
+                                          <Button onAction="#saleRegister" mnemonicParsing="false" text="Zarejestruj się">
                                              <HBox.margin>
                                                 <Insets right="30.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button mnemonicParsing="false" text="Anuluj">
+                                          <Button onAction="#cancel" mnemonicParsing="false" text="Anuluj">
                                              <HBox.margin>
                                                 <Insets left="30.0" />
                                              </HBox.margin>

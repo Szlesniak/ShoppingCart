@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="760.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="760.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonController">
    <children>
-      <Label text="Nazwa Produktu" textAlignment="CENTER">
+      <Label fx:id="Name" text="Nazwa Produktu" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -18,22 +18,22 @@
       </Label>
       <HBox prefHeight="170.0" prefWidth="150.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Photo" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin></ImageView>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="250.0">
                <children>
-                  <Label prefHeight="185.0" prefWidth="260.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non eros lobortis purus lobortis venenatis et vulputate tellus. In non odio tellus. Quisque porttitor tellus non eros posuere, et efficitur magna iaculis. Duis sollicitudin mi vitae viverra semper. Aenean tincidunt convallis mi eu laoreet." textAlignment="CENTER" wrapText="true" />
+                  <Label fx:id="Description" prefHeight="185.0" prefWidth="260.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non eros lobortis purus lobortis venenatis et vulputate tellus. In non odio tellus. Quisque porttitor tellus non eros posuere, et efficitur magna iaculis. Duis sollicitudin mi vitae viverra semper. Aenean tincidunt convallis mi eu laoreet." textAlignment="CENTER" wrapText="true" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="170.0" prefWidth="100.0">
                <children>
-                  <Label prefHeight="50.0" text="Dostępna Ilość" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                  <Label  prefHeight="50.0" text="Dostępna Ilość" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField alignment="CENTER" editable="false" maxWidth="50.0" minWidth="30.0">
+                  <TextField fx:id="Availability" alignment="CENTER" editable="false" maxWidth="50.0" minWidth="30.0">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
@@ -41,30 +41,30 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="170.0" prefWidth="110.0">
                <children>
-                  <Label text="Wybierz ilość" textAlignment="CENTER">
+                  <Label  text="Wybierz ilość" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField alignment="CENTER" maxWidth="50.0">
+                  <TextField fx:id="Amount" alignment="CENTER" maxWidth="50.0">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
-                  <Label text="Cena" textAlignment="CENTER">
+                  <Label  text="Cena" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField alignment="CENTER" editable="false" maxWidth="50.0" />
+                  <TextField fx:id="Prize" alignment="CENTER" editable="false" maxWidth="50.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="170.0" prefWidth="120.0">
                <children>
-                  <Button mnemonicParsing="false" text="Dodaj do koszyka" textAlignment="CENTER" />
+                  <Button onAction="#addToCart" mnemonicParsing="false" text="Dodaj do koszyka" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>

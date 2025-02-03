@@ -11,7 +11,7 @@ public class KoszykApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(KoszykApplication.class.getResource("strona.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1280, 1024);
+        Scene scene = new Scene(fxmlLoader.load(), 800, 600);
         stage.setResizable(false);
         stage.setTitle("Koszyk!");
         stage.setScene(scene);

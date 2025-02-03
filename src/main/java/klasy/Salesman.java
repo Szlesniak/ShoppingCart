@@ -7,8 +7,9 @@ public class Salesman extends Dane {
     String NIP;
     ArrayList<Product> SalesmanProducts = new ArrayList<Product>();
     ArrayList<Product> BoughtProducts = new ArrayList<Product>();
-    public Salesman(String company_name, String NIP, String login, String password, String miasto, String ulica, String nr_bud, String email){
+    public Salesman(String login,String password, String company_name, String NIP, String email, String phone, String miasto, String ulica, String nr_bud){
         this.password = password;
+        this.phone = phone;
         this.login = login;
         this.email = email;
         this.miasto = miasto;
@@ -23,7 +24,10 @@ public class Salesman extends Dane {
     public void aktualizujIlosc(Product product, int ilosc){
         product.setAmount(ilosc);
     }
-
-
-
+    public String getLogin() {
+        return login;
+    }
+    public String getPassword() {
+        return password;
+    }
 }
