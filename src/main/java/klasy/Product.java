@@ -7,6 +7,8 @@ public class Product {
     private int amount = 0;
     private String description;
     private String photo;
+    public int bought = 0;
+    public int sold = 0;
     public Product(String name, double price, int amount, String description, String photo) {
         this.name = name;
         this.price = price;
@@ -33,7 +35,7 @@ public class Product {
         amount = newAmount;
     }
     public double getTotalPrice() {
-        return price * amount;
+        return price * bought;
     }
     public void addAmount(int amount) {
         this.amount += amount;
@@ -49,5 +51,15 @@ public class Product {
     }
     public String getPhoto() {
         return photo;
+    }
+    public void setBought(int newamount){
+        bought = newamount;
+
+    }
+    public int getSold(){
+        return sold;
+    }
+    public double getSoldPrice(){
+        return sold * price;
     }
 }
