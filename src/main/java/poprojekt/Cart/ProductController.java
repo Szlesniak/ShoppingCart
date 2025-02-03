@@ -26,6 +26,7 @@ public class ProductController {
     public void addProduct(){
         Product product = new Product(name.getText(), Double.parseDouble(prize.getText()), Integer.parseInt(amount.getText()), description.getText(), photo.getText());
         SalesmanController.addProductToList(product);
+        SalesmanController.addProductToUI(product);
         AddProduct.getScene().getWindow().hide();
         System.out.println("Dodano nowy produkt!");
     }

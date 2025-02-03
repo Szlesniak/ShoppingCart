@@ -8,7 +8,7 @@
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonKoszController">
    <children>
-      <Label text="Nazwa Produktu" textAlignment="CENTER">
+      <Label fx:id="Name" text="Nazwa Produktu" textAlignment="CENTER">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -18,7 +18,7 @@
       </Label>
       <HBox prefHeight="170.0" prefWidth="150.0">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="Photo" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="10.0" top="10.0" />
                </HBox.margin></ImageView>
@@ -31,7 +31,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField alignment="CENTER" editable="false" maxWidth="50.0">
+                  <TextField fx:id="Amount" alignment="CENTER" editable="false" maxWidth="50.0">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
@@ -42,7 +42,7 @@
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
-                  <TextField alignment="CENTER" editable="false" maxWidth="50.0" />
+                  <TextField fx:id="Prize" alignment="CENTER" editable="false" maxWidth="50.0" />
                </children>
             </VBox>
             <VBox alignment="CENTER" prefHeight="170.0" prefWidth="170.0">
@@ -55,12 +55,12 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField alignment="CENTER" maxWidth="50.0" prefWidth="50.0" promptText="1">
+                  <TextField fx:id="Delete" alignment="CENTER" maxWidth="50.0" prefWidth="50.0" promptText="1">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button mnemonicParsing="false" text="Usuń z koszyka">
+                  <Button onAction="#delete" mnemonicParsing="false" text="Usuń z koszyka">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></Button>

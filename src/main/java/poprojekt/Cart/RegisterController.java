@@ -67,7 +67,8 @@ public class RegisterController {
         String nr_bud = userNr.getText();
         User user = new User(login, password, name, surname, email, phone, miasto, ulica, nr_bud);
         dataManager.addUser(user);
-        wiadomosc("Zarejestrowano");
+        dataManager.setCurrentUser(user);
+        wiadomosc("Zarejestrowano nowe konto!");
         changeScene(event, "zaloguj.fxml");
     }
 
@@ -83,7 +84,8 @@ public class RegisterController {
         String nr_bud = saleNr.getText();
         Salesman salesman = new Salesman(login, password, company, NIP, email, phone, miasto, ulica, nr_bud);
         dataManager.addSalesman(salesman);
-        wiadomosc("Zarejestrowano");
+        dataManager.setCurrentSalesman(salesman);
+        wiadomosc("Zarejestrowano nowe konto!");
         changeScene(event, "zaloguj.fxml");
     }
     public void cancel(ActionEvent event){

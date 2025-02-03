@@ -13,9 +13,9 @@
                 <AnchorPane maxWidth="500.0" minHeight="0.0" minWidth="500.0" style="-fx-background-color: #C1FFC1;" SplitPane.resizableWithParent="false">
                      <children>
                         <ScrollPane prefHeight="568.0" prefWidth="500.0">
-                          <content>
-                            <AnchorPane />
-                          </content>
+                           <content>
+                              <VBox fx:id="contentBox" />
+                           </content>
                         </ScrollPane>
                      </children></AnchorPane>
                 <AnchorPane centerShape="false" style="-fx-background-color: #C1FFC1;" SplitPane.resizableWithParent="false">
@@ -46,9 +46,9 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <TextField maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="1" />
-                              <ComboBox prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <ComboBox prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <TextField fx:id="prize" maxWidth="120.0" prefWidth="120.0" GridPane.columnIndex="1" />
+                              <ComboBox fx:id="platnosc" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="dostawa" prefWidth="120.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                            </children>
                         </GridPane>
                         <Label layoutX="45.0" layoutY="99.0" text="Podsumowanie">
@@ -56,12 +56,12 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="148.0" layoutY="451.0" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" text="Zamów">
+                        <Button layoutX="148.0" layoutY="451.0" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" onAction="#order" text="Zamów">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button layoutX="45.0" layoutY="441.0" maxWidth="70.0" mnemonicParsing="false" text="Wyczyść Koszyk" textAlignment="CENTER" wrapText="true">
+                        <Button layoutX="45.0" layoutY="441.0" maxWidth="70.0" mnemonicParsing="false" onAction="#clearcart" text="Wyczyść Koszyk" textAlignment="CENTER" wrapText="true">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -20,12 +20,12 @@
                   <Insets right="270.0" />
                </HBox.margin>
             </Label>
-            <Button mnemonicParsing="false" text="Wyloguj się">
+            <Button mnemonicParsing="false" onAction="#logout" text="Wyloguj się">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin>
             </Button>
-            <TextField alignment="CENTER" editable="false" maxWidth="120.0" text="Username">
+            <TextField fx:id="username" alignment="CENTER" editable="false" maxWidth="120.0" text="Username">
                <HBox.margin>
                   <Insets left="10.0" />
                </HBox.margin></TextField>
@@ -36,9 +36,9 @@
           <AnchorPane maxWidth="500.0" minHeight="0.0" minWidth="500.0" style="-fx-background-color: #C1FFC1;" SplitPane.resizableWithParent="false">
                <children>
                   <ScrollPane prefHeight="500.0" prefWidth="506.0">
-                    <content>
-                      <AnchorPane />
-                    </content>
+                     <content>
+                        <VBox fx:id="contentBox" />
+                     </content>
                   </ScrollPane>
                </children></AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: #C1FFC1;" SplitPane.resizableWithParent="false">
@@ -78,7 +78,7 @@
                         <Font name="System Bold" size="24.0" />
                      </font>
                   </Label>
-                  <Button onAction="#onAddProduct" layoutX="80.0" layoutY="399.0" mnemonicParsing="false" text="Dodaj produkt" />
+                  <Button layoutX="80.0" layoutY="399.0" mnemonicParsing="false" onAction="#onAddProduct" text="Dodaj produkt" />
                </children></AnchorPane>
         </items>
       </SplitPane>
