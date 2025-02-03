@@ -1,5 +1,10 @@
 package klasy;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.List;
+
 public class Product {
     private int id;
     public String name;
@@ -56,6 +61,25 @@ public class Product {
         bought = newamount;
 
     }
+    public void decreaseStock(int amount) {
+        if (amount > 0 && amount <= this.amount) {
+            this.amount -= amount;
+        } else {
+            System.out.println("Błąd: Brak wystarczającej ilości produktu w magazynie!");
+        }
+    }
+    public static void saveProductsToCSV(List<Product> products, String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write("Nazwa,Cena,StanMagazynowy\n"); // Nagłówki kolumn
+            for (Product product : products) {
+                writer.write(product.getName() + "," + product.getPrice() + "," + product.getAmount() + "\n");
+            }
+            System.out.println("Produkty zapisano do pliku: " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getBought(){
         return bought;
     }
