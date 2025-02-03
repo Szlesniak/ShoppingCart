@@ -27,14 +27,15 @@ public class Cart {
         }
         return totalPrice;
     }
-    public boolean isEmpty(){
-        if (products.size() > 0) {
-            return false;
-        } else {
-            return true;
-        }
+    public boolean isEmpty() {
+        return products.isEmpty();
     }
+
     public int iloscProduktów(){
-        return products.size();
+        int l = 0;
+        for (Product product : products) {
+            l += product.bought;
+        }
+        return l;
     }
 }
