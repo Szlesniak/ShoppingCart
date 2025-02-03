@@ -56,6 +56,9 @@ public class Product {
         bought = newamount;
 
     }
+    public int getBought(){
+        return bought;
+    }
     public int getSold(){
         return sold;
     }
