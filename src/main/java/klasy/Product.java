@@ -30,7 +30,7 @@ public class Product {
     public double getPrice() {
         return price;
     }
-    public void setPrice(int newprice){
+    public void setPrice(Double newprice){
         price = newprice;
     }
     public int getAmount() {

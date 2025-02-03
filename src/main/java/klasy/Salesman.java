@@ -30,4 +30,7 @@ public class Salesman extends Dane {
     public String getPassword() {
         return password;
     }
+    public ArrayList<Product> getSalesmanProducts() {
+        return SalesmanProducts;
+    }
 }

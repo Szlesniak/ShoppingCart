@@ -9,6 +9,8 @@ public class DataManager {
     private ArrayList<User> users;
     private ArrayList<Salesman> salesmen;
     private ObservableList<Product> productList;
+    private User currentUser;
+    private Salesman currentSalesman;
 
     private DataManager() {
         users = new ArrayList<>();
@@ -45,5 +47,18 @@ public class DataManager {
 
     public ObservableList<Product> shareProductList() {
         return productList;
+    }
+
+    public void setCurrentUser(User user) {
+        currentUser = user;
+    }
+    public User getCurrentUser() {
+        return currentUser;
+    }
+    public void setCurrentSalesman(Salesman salesman) {
+        currentSalesman = salesman;
+    }
+    public Salesman getCurrentSalesman() {
+        return currentSalesman;
     }
 }

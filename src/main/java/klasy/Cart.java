@@ -1,9 +1,12 @@
 package klasy;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Cart {
-    private ArrayList<Product> cartProducts = new ArrayList<Product>();
+    private ObservableList<Product> cartProducts = FXCollections.observableArrayList();
     public void addProduct(Product product, int amount) {
         cartProducts.add(product);
         product.setBought(amount);
@@ -14,7 +17,7 @@ public class Cart {
     public void clearCart(){
         cartProducts.clear();
     }
-    public ArrayList<Product> getProducts() {
+    public ObservableList<Product> getProducts() {
         return cartProducts;
     }
     public double getTotalPrice() {
