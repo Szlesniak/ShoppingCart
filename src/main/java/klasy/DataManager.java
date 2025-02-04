@@ -17,11 +17,15 @@ public class DataManager {
     private User currentUser;
     private Salesman currentSalesman;
 
+    String workingDir = System.getProperty("user.dir");  // Pobiera katalog roboczy
+    String filePath = workingDir + "/Produkty.csv";  // Tworzy pełną ścieżkę do pliku
+    File file = new File(filePath);  // Tworzy obiekt pliku
+
     private DataManager() {
 
         users = new ArrayList<>();
         salesmen = new ArrayList<>();
-        productList = loadProductsFromCSV("/Produkty.csv");
+        productList = loadProductsFromCSV();
     }
 
     public static DataManager getInstance() {
@@ -55,25 +59,20 @@ public class DataManager {
         return productList;
     }
 
-    public void saveProductsToCSV(List<Product> products, String resourcePath) {
-        InputStream inputStream = getClass().getResourceAsStream(resourcePath);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(resourcePath, true))) {
+    public void saveProductsToCSV(List<Product> products) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
             for (Product product : products) {
-                writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto());
+                writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto() + "\n");
             }
-            System.out.println("Produkty zapisano do pliku: " + resourcePath);
+            System.out.println("Produkty zapisano do pliku! ");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public ObservableList<Product> loadProductsFromCSV(String resourcePath) {
+    public ObservableList<Product> loadProductsFromCSV() {
         ObservableList<Product> products = FXCollections.observableArrayList();
-
-        try (InputStream inputStream = getClass().getResourceAsStream(resourcePath)) {
-            if (inputStream == null) {
-                throw new FileNotFoundException("Nie znaleziono zasobu: " + resourcePath);
-            }
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
 
             String line;
             boolean firstLine = true;
@@ -83,7 +82,6 @@ public class DataManager {
                     firstLine = false;
                     continue;
                 }
-
                 String[] data = line.split(";");
                 String name = data[0];
                 double price = Double.parseDouble(data[1]);

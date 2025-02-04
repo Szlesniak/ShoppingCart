@@ -1,6 +1,5 @@
 package poprojekt.Cart;
 
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -64,6 +63,7 @@ public class SalesmanController {
         dataManager.addProduct(product);
         salesman.addProduct(product);
         refresh();
+        dataManager.saveProductsToCSV(dataManager.shareProductList());
     }
 
     public void addProductToUI(Product product) {
