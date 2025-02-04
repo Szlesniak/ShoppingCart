@@ -20,6 +20,7 @@ public class SzablonKoszController {
     Product currentproduct;
     DataManager dataManager = DataManager.getInstance();
     ObservableList<Product> CartProductList = FXCollections.observableArrayList();
+    int amount;
     @FXML
     private Label Name;
     @FXML

@@ -1,5 +1,6 @@
 package poprojekt.Cart;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -52,8 +53,8 @@ public class CartController {
 
             SzablonKoszController controller = loader.getController();
             controller.setMainController(this);
-            controller.setRoot(this);
-            CartController.getChildren().add(productNode);
+            controller.setRoot(productNode);
+
             controller.setProductData(product.getName(), product.getBought(), product.getPrice(), product.getPhoto() );
 
             contentBox.getChildren().add(productNode);
@@ -79,6 +80,6 @@ public class CartController {
         prize.setText(Double.toString(currentuser.cart.getTotalPrice()));
     }
     public void removeTemplate(Parent template) {
-        CartController.getChildren().remove(template);
+        Platform.runLater(()->contentBox.getChildren().remove(template));
     }
 }
