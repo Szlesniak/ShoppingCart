@@ -13,10 +13,12 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import klasy.DataManager;
 import klasy.Product;
+import klasy.User;
 
 import java.io.IOException;
 
 public class UserController {
+    User currentUser;
     @FXML
     private TextField username;
     @FXML
@@ -28,7 +30,8 @@ public class UserController {
 
     public void initialize() {
         productsList = dataManager.shareProductList();
-        username.setText(dataManager.getCurrentUser().getLogin());
+        currentUser = dataManager.getCurrentUser();
+        username.setText(currentUser.getLogin());
         refresh();
     }
 
@@ -83,5 +86,6 @@ public class UserController {
         for (Product product : productsList) {
             addProductToUI(product);
         }
+        currentUser = dataManager.getCurrentUser();
     }
 }

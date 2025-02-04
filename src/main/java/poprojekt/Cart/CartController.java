@@ -51,6 +51,9 @@ public class CartController {
             Parent productNode = loader.load();
 
             SzablonKoszController controller = loader.getController();
+            controller.setMainController(this);
+            controller.setRoot(this);
+            CartController.getChildren().add(productNode);
             controller.setProductData(product.getName(), product.getBought(), product.getPrice(), product.getPhoto() );
 
             contentBox.getChildren().add(productNode);
@@ -74,5 +77,8 @@ public class CartController {
             addProductToUI(product);
         }
         prize.setText(Double.toString(currentuser.cart.getTotalPrice()));
+    }
+    public void removeTemplate(Parent template) {
+        CartController.getChildren().remove(template);
     }
 }

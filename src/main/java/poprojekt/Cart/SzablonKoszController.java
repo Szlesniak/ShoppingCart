@@ -3,6 +3,7 @@ package poprojekt.Cart;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -12,6 +13,8 @@ import klasy.Product;
 import klasy.User;
 
 public class SzablonKoszController {
+    private CartController mainController;
+    private Parent root;
     User currentuser;
     Cart currentcart;
     Product currentproduct;
@@ -34,14 +37,19 @@ public class SzablonKoszController {
                 currentproduct.decreaseStock(Integer.parseInt(Delete.getText()));
                 if (currentproduct.getAmount() == 0){
                     currentcart.removeProduct(currentproduct);
+                    mainController.removeTemplate(root);
                 }
             }
         }
+        refresh();
+        mainController.refresh();
     }
+
     public void initialize() {
         currentuser = dataManager.getCurrentUser();
         currentcart = currentuser.cart;;
         CartProductList = currentcart.getProducts();
+        mainController.refresh();
     }
     public void setProductData(String name, int amount  , Double prize, String photo){
         Name.setText(name);
@@ -53,5 +61,11 @@ public class SzablonKoszController {
         Name.setText(currentproduct.getName());
         Amount.setText(Integer.toString(currentproduct.getAmount()));
         Prize.setText(Double.toString(currentproduct.getPrice()));
+    }
+    public void setMainController(CartController mainController) {
+        this.mainController = mainController;
+    }
+    public void setRoot(Parent root) {
+        this.root = root;
     }
 }
