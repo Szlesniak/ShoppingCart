@@ -65,7 +65,7 @@ public class Product {
         if (amount > 0 && amount <= this.amount) {
             this.amount -= amount;
         } else {
-            System.out.println("Błąd: Brak wystarczającej ilości produktu w magazynie!");
+            System.out.println("Błąd: Brak wystarczającej ilości produktu w Koszyku!");
         }
     }
     public static void saveProductsToCSV(List<Product> products, String filePath) {
@@ -89,4 +89,5 @@ public class Product {
     public double getSoldPrice(){
         return sold * price;
     }
+
 }
