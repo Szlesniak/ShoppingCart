@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 
 import javax.print.attribute.standard.JobStateReason;
 import java.io.*;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class DataManager {
 
         users = new ArrayList<>();
         salesmen = new ArrayList<>();
-        productList = loadProductsFromCSV("C:/Users/szyml/IdeaProjects/ShoppingCarty/src/main/resources/Produkty.csv");
+        productList = loadProductsFromCSV("/Produkty.csv");
     }
 
     public static DataManager getInstance() {
@@ -54,20 +55,26 @@ public class DataManager {
         return productList;
     }
 
-    public void saveProductsToCSV(List<Product> products, String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+    public void saveProductsToCSV(List<Product> products, String resourcePath) {
+        InputStream inputStream = getClass().getResourceAsStream(resourcePath);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(resourcePath, true))) {
             for (Product product : products) {
                 writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto());
             }
-            System.out.println("Produkty zapisano do pliku: " + filePath);
+            System.out.println("Produkty zapisano do pliku: " + resourcePath);
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-    public ObservableList<Product> loadProductsFromCSV(String filePath) {
+    public ObservableList<Product> loadProductsFromCSV(String resourcePath) {
         ObservableList<Product> products = FXCollections.observableArrayList();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        try (InputStream inputStream = getClass().getResourceAsStream(resourcePath)) {
+            if (inputStream == null) {
+                throw new FileNotFoundException("Nie znaleziono zasobu: " + resourcePath);
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
+
             String line;
             boolean firstLine = true;
 
@@ -78,16 +85,13 @@ public class DataManager {
                 }
 
                 String[] data = line.split(";");
-                    String name = data[0];
-                    double price = Double.parseDouble(data[1]);
-                    int stock = Integer.parseInt(data[2]);
-                    String description = data[3];
-                    String photo = data[4];
+                String name = data[0];
+                double price = Double.parseDouble(data[1]);
+                int stock = Integer.parseInt(data[2]);
+                String description = data[3];
+                String photo = data[4];
 
-
-
-                    products.add(new Product(name, price, stock, description, photo));
-
+                products.add(new Product(name, price, stock, description, photo));
             }
         } catch (IOException e) {
             e.printStackTrace();
