@@ -36,6 +36,7 @@ public class LoginController {
             if (user.getLogin().equals(username) && user.getPassword().equals(password)) {
                 changeScene(event, "strona_zalog_user.fxml");
                 wiadomosc("Zalogowano jako: " + user.getLogin());
+                dataManager.setCurrentUser(user);
                 return;
             }
         }
@@ -44,6 +45,7 @@ public class LoginController {
             if (salesman.getLogin().equals(username) && salesman.getPassword().equals(password)) {
                 changeScene(event, "strona_zalog_salesman.fxml");
                 wiadomosc("Zalogowano jako: " + salesman.getLogin());
+                dataManager.setCurrentSalesman(salesman);
                 return;
             }
         }
