@@ -70,7 +70,7 @@ public class Product {
     }
     public static void saveProductsToCSV(List<Product> products, String filePath) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("Nazwa,Cena,StanMagazynowy\n"); // Nagłówki kolumn
+            writer.write("Nazwa,Cena,StanMagazynowy\n");
             for (Product product : products) {
                 writer.write(product.getName() + "," + product.getPrice() + "," + product.getAmount() + "\n");
             }

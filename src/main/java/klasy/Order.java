@@ -20,9 +20,10 @@ public class Order extends Cart {
 
     public void finalizeOrder() {
         for (Product product : user.cart.getProducts()) {
-            product.decreaseStock(product.getBought()); // Odejmujemy zakupioną ilość
+            product.decreaseStock(product.getBought());
+            product.setBought(0);
         }
-        user.cart.clearCart(); // Czyścimy koszyk po zakupie
+        user.cart.clearCart();
         System.out.println("Zamówienie zrealizowane! Ilość produktów w magazynie zaktualizowana.");
     }
 
@@ -37,18 +38,15 @@ public class Order extends Cart {
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
-            // Nagłówek
             contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
             contentStream.beginText();
             contentStream.newLineAtOffset(100, 700);
             contentStream.showText("Zamówienie nr " + order.getOrderId());
             contentStream.endText();
 
-            // Nagłówki tabeli
             contentStream.showText("Nazwa produktu\tIlość\tCena");
             contentStream.newLineAtOffset(0, -15);
 
-            // Produkty
             for (Product item : order.user.cart.getProducts()) {
                 String row = String.format("%s\t%d\t%.2f zł",
                         item.getName(),
@@ -59,7 +57,6 @@ public class Order extends Cart {
                 contentStream.newLineAtOffset(0, -15);
             }
 
-            // Suma
             contentStream.newLineAtOffset(0, -30);
             contentStream.showText("Suma: " + String.format("%.2f zł", order.user.cart.getTotalPrice()));
             contentStream.endText();
