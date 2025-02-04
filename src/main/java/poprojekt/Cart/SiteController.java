@@ -30,6 +30,9 @@ public class SiteController {
     @FXML
     private VBox contentBox;
 
+
+
+
     private void addProductToUI(Product product) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("szablon_produkt.fxml"));
@@ -44,7 +47,7 @@ public class SiteController {
         }
     }
     public void initialize() {
-        productsList = dataManager.shareProductList();
+        productsList = (dataManager.shareProductList());
         contentBox.getChildren().clear();
         for (Product product : productsList) {
             addProductToUI(product);

@@ -58,6 +58,7 @@ public class SalesmanController {
     public void addProductToList(Product product) {
         dataManager.addProduct(product);
         salesman.addProduct(product);
+        dataManager.saveProductsToCSV(dataManager.shareProductList(), "C://Users//szyml//IdeaProjects//ShoppingCarty//src//main//java//Produkty.csv");
     }
     public void addProductToUI(Product product) {
         try {

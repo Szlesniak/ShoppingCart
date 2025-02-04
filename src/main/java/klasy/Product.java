@@ -68,17 +68,6 @@ public class Product {
             System.out.println("Błąd: Brak wystarczającej ilości produktu w magazynie!");
         }
     }
-    public static void saveProductsToCSV(List<Product> products, String filePath) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
-            writer.write("Nazwa,Cena,StanMagazynowy\n");
-            for (Product product : products) {
-                writer.write(product.getName() + "," + product.getPrice() + "," + product.getAmount() + "\n");
-            }
-            System.out.println("Produkty zapisano do pliku: " + filePath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public int getBought(){
         return bought;

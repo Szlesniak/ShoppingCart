@@ -56,7 +56,7 @@ public class SzablonController {
 
     DataManager dataManager = DataManager.getInstance();
     public void initialize() {
-        productsList = dataManager.shareProductList();
+        productsList = (dataManager.shareProductList());
         currentuser = dataManager.getCurrentUser();
     }
 
