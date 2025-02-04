@@ -34,18 +34,18 @@ public class LoginController {
 
         for (User user : users) {
             if (user.getLogin().equals(username) && user.getPassword().equals(password)) {
+                dataManager.setCurrentUser(user);
                 changeScene(event, "strona_zalog_user.fxml");
                 wiadomosc("Zalogowano jako: " + user.getLogin());
-                dataManager.setCurrentUser(user);
                 return;
             }
         }
 
         for (Salesman salesman : salesmen) {
             if (salesman.getLogin().equals(username) && salesman.getPassword().equals(password)) {
+                dataManager.setCurrentSalesman(salesman);
                 changeScene(event, "strona_zalog_salesman.fxml");
                 wiadomosc("Zalogowano jako: " + salesman.getLogin());
-                dataManager.setCurrentSalesman(salesman);
                 return;
             }
         }

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonKoszController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonKoszController">
    <children>
       <Label fx:id="Name" text="Nazwa Produktu" textAlignment="CENTER">
          <font>
@@ -35,7 +35,7 @@
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
-                  <Label text="Cena" textAlignment="CENTER">
+                  <Label text="Cena [zł]" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -60,7 +60,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </TextField>
-                  <Button onAction="#delete" mnemonicParsing="false" text="Usuń z koszyka">
+                  <Button mnemonicParsing="false" onAction="#delete" text="Usuń z koszyka">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></Button>

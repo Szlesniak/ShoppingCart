@@ -13,6 +13,7 @@ import klasy.User;
 
 
 public class SzablonController {
+    int amount;
     User currentuser;
     Product currentproduct;
     ObservableList<Product> productsList = FXCollections.observableArrayList();
@@ -35,13 +36,18 @@ public class SzablonController {
                 currentproduct = product;
             }
         }
-        int amount = Integer.parseInt(Amount.getText());
+        if (Amount.getText().isEmpty() || Amount.getText()==null){
+            wiadomosc("Podaj ilość!");
+            return;
+        } else {
+            amount = Integer.parseInt(Amount.getText());
+        }
         if (Integer.parseInt(Amount.getText()) > currentproduct.getAmount()){
-            Amount.setText("Too much");
+            wiadomosc("Za dużo!");
             return;
         }
         if (Integer.parseInt(Amount.getText()) < 1){
-            Amount.setText("Too little");
+            wiadomosc("Wprowadzono nieprawidłową ilość!");
             return;
         }
         if (Integer.parseInt(Amount.getText())==0){
@@ -51,6 +57,8 @@ public class SzablonController {
             wiadomosc("Nie masz koszyka, zaloguj sie najpierw!");
         } else {
             currentuser.cart.addProduct(currentproduct, amount);
+            wiadomosc("Dodano do koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
+            refresh();
         }
     }
 
@@ -73,5 +81,8 @@ public class SzablonController {
         alert.setHeaderText(null);
         alert.setContentText(wiadomosc);
         alert.showAndWait();
+    }
+    public void refresh(){
+        Availability.setText(Integer.toString(currentproduct.getAmount()-currentproduct.getBought()));
     }
 }

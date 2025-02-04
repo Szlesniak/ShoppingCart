@@ -9,8 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import klasy.DataManager;
 import klasy.Product;
+import klasy.Salesman;
 
 public class SzablonSaleController {
+    Salesman salesman;
+    SalesmanController SalesmanController;
     Product currentproduct;
     ObservableList<Product> productsList = FXCollections.observableArrayList();
     @FXML
@@ -37,6 +40,7 @@ public class SzablonSaleController {
             }
         }
         currentproduct.setAmount(currentproduct.getAmount()+Integer.parseInt(Dodaj.getText()));
+        wiadomosc("Dodano: " + Dodaj.getText() + " sztuk\n Produktu: " + currentproduct.getName());
         refresh();
     }
     public void zmien(){
@@ -46,6 +50,7 @@ public class SzablonSaleController {
             }
         }
         currentproduct.setPrice(Double.parseDouble(Zmien.getText()));
+        wiadomosc("Zmieniono cenę produktu: " + currentproduct.getName() + " na: " + Zmien.getText());
         refresh();
     }
     public void setProductData(String name,Double cena, int amount, int soldamount,double soldprize, String photo){
@@ -60,6 +65,7 @@ public class SzablonSaleController {
     DataManager dataManager = DataManager.getInstance();
     public void initialize() {
         productsList = dataManager.shareProductList();
+        salesman = dataManager.getCurrentSalesman();
     }
     public void refresh(){
         for (Product product : productsList) {
@@ -72,6 +78,28 @@ public class SzablonSaleController {
         Amount.setText(Integer.toString(currentproduct.getAmount()));
         Soldamount.setText(Integer.toString(currentproduct.getSold()));
         Soldprize.setText(Double.toString(currentproduct.getSoldPrice()));
+    }
+    public void wiadomosc(String wiadomosc) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wiadomość");
+        alert.setHeaderText(null);
+        alert.setContentText(wiadomosc);
+        alert.showAndWait();
+    }
+    @FXML
+    public void Usun(){
+        for (Product product : productsList) {
+            if(product.getName().equals(Name.getText())){
+                productsList.remove(product);
+                salesman.getSalesmanProducts().remove(product);
+                wiadomosc("Usunięto produkt: " + product.getName());
+                SalesmanController.refresh();
+                return;
+            }
+        }
+    }
+    public void setSalesmanController(SalesmanController salesmanController) {
+        this.SalesmanController = salesmanController;
     }
 
 }

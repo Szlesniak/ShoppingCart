@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -32,25 +33,36 @@ public class SzablonKoszController {
     @FXML
     private TextField Delete;
 
-    public void delete(){
-        for (Product product : CartProductList) {
-            if(product.getName().equals(Name.getText())){
-                currentproduct.decreaseStock(Integer.parseInt(Delete.getText()));
-                if (currentproduct.getAmount() == 0){
-                    currentcart.removeProduct(currentproduct);
-                    mainController.removeTemplate(root);
+    public void delete() {
+        if (CartProductList.isEmpty()) {
+            wiadomosc("Koszyk jest pusty!");
+        } else {
+            for (Product product : CartProductList) {
+                if (product.getName().equals(Name.getText())) {
+                    currentproduct = product;
+                    if (Delete.getText().isEmpty() || Delete.getText() == null || Delete.getText().equals("0")) {
+                        wiadomosc("Podaj ilość!");
+                        return;
+                    } else {
+                        amount = Integer.parseInt(Delete.getText());
+                    }
+                    currentproduct.decreaseStock(amount);
+                    wiadomosc("Usunięto z koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
+                    if (currentproduct.getAmount() <= 0 && mainController != null && root != null) {
+                        currentcart.removeProduct(currentproduct);
+                        mainController.removeTemplate(root);
+                    }
                 }
             }
+            refresh();
+            mainController.refresh();
         }
-        refresh();
-        mainController.refresh();
     }
 
     public void initialize() {
         currentuser = dataManager.getCurrentUser();
         currentcart = currentuser.cart;;
         CartProductList = currentcart.getProducts();
-        mainController.refresh();
     }
     public void setProductData(String name, int amount  , Double prize, String photo){
         Name.setText(name);
@@ -68,5 +80,12 @@ public class SzablonKoszController {
     }
     public void setRoot(Parent root) {
         this.root = root;
+    }
+    public void wiadomosc(String wiadomosc) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wiadomość");
+        alert.setHeaderText(null);
+        alert.setContentText(wiadomosc);
+        alert.showAndWait();
     }
 }

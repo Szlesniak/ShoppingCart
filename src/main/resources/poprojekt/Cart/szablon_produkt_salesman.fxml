@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonSaleController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonSaleController">
    <children>
       <Label fx:id="Name" text="Nazwa Produktu" textAlignment="CENTER">
          <font>
@@ -35,7 +35,7 @@
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
-                  <Label text="Cena" textAlignment="CENTER">
+                  <Label text="Cena [zł]" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -59,7 +59,7 @@
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
-                  <Label text="Zarobek" textAlignment="CENTER">
+                  <Label text="Zarobek [zł]" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -97,6 +97,11 @@
                         <TextField fx:id="Zmien" maxWidth="50.0" prefHeight="25.0" prefWidth="50.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
+                  <Button onAction="#Usun" mnemonicParsing="false" text="Usuń" textAlignment="CENTER">
+                     <VBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
                </children>
             </VBox>
          </children>

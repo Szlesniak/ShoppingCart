@@ -59,7 +59,7 @@
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="126.0" text="Łączna kwota zarobiona" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="47.0" prefWidth="126.0" text="Łączna kwota zarobiona [zł]" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

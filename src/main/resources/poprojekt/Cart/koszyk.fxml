@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.CartController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #77B5FE;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.CartController">
    <children>
       <HBox layoutX="14.0" layoutY="14.0" prefHeight="570.0" prefWidth="770.0" style="-fx-background-color: #C1FFC1;">
          <children>
@@ -31,7 +31,7 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="132.0" text="Kwota">
+                              <Label alignment="CENTER" prefHeight="17.0" prefWidth="132.0" text="Kwota [zł]">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
@@ -56,7 +56,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="148.0" layoutY="451.0" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" onAction="#order" text="Zamów">
+                        <Button fx:id="Clear" layoutX="148.0" layoutY="451.0" maxWidth="70.0" minWidth="70.0" mnemonicParsing="false" onAction="#order" text="Zamów">
                            <font>
                               <Font size="15.0" />
                            </font>

@@ -47,4 +47,7 @@ public class Salesman extends Dane {
         }
         return total;
     }
+    public String getCompany_name() {
+        return company_name;
+    }
 }

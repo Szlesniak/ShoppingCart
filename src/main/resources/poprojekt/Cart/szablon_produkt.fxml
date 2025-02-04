@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="760.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.6" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="760.0" style="-fx-background-color: #86818D;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="poprojekt.Cart.SzablonController">
    <children>
       <Label fx:id="Name" text="Nazwa Produktu" textAlignment="CENTER">
          <font>
@@ -29,7 +29,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="170.0" prefWidth="100.0">
                <children>
-                  <Label  prefHeight="50.0" text="Dostępna Ilość" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
+                  <Label prefHeight="50.0" text="Dostępna Ilość" textAlignment="CENTER" textOverrun="CLIP" wrapText="true">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font></Label>
@@ -41,7 +41,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="170.0" prefWidth="110.0">
                <children>
-                  <Label  text="Wybierz ilość" textAlignment="CENTER">
+                  <Label text="Wybierz ilość" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -52,7 +52,7 @@
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin></TextField>
-                  <Label  text="Cena" textAlignment="CENTER">
+                  <Label text="Cena [zł]" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -64,7 +64,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="170.0" prefWidth="120.0">
                <children>
-                  <Button onAction="#addToCart" mnemonicParsing="false" text="Dodaj do koszyka" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#addToCart" text="Dodaj do koszyka" textAlignment="CENTER" />
                </children>
             </VBox>
          </children>

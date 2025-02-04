@@ -6,6 +6,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
@@ -13,9 +15,8 @@ import klasy.DataManager;
 import klasy.Product;
 import klasy.User;
 
-import java.io.IOException;
-
 public class CartController {
+    UserController userController;
     @FXML
     private ComboBox<String> platnosc;
     @FXML
@@ -24,6 +25,8 @@ public class CartController {
     private TextField prize;
     @FXML
     private VBox contentBox;
+    @FXML
+    private Button Clear;
 
     String paymentMethod1 = "Przelew";
     String paymentMethod2 = "Blik";
@@ -42,9 +45,18 @@ public class CartController {
         currentuser = dataManager.getCurrentUser();
         productsList = currentuser.cart.getProducts();
         currentuser = dataManager.getCurrentUser();
-        refresh();
         String deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
         String paymentMethod = platnosc.getSelectionModel().getSelectedItem();
+        refresh();
+        if (currentuser.cart.getProducts().isEmpty()){
+            Clear.setDisable(true);
+            platnosc.setDisable(true);
+            dostawa.setDisable(true);
+        } else {
+            Clear.setDisable(false);
+            platnosc.setDisable(false);
+            dostawa.setDisable(false);
+        }
     }
     private void addProductToUI(Product product) {
         try {
@@ -58,18 +70,25 @@ public class CartController {
             controller.setProductData(product.getName(), product.getBought(), product.getPrice(), product.getPhoto() );
 
             contentBox.getChildren().add(productNode);
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     public void order() {
 
+
+        wiadomosc("Zamówienie złożone!");
         clearcart();
     }
     public void clearcart() {
+        if (currentuser.cart.getProducts().isEmpty()) {
+            wiadomosc("Koszyk jest pusty nie ma czego usuwać!");
+            return;
+        }
         currentuser.cart.clearCart();
         refresh();
+        userController.refresh();
     }
     public void refresh() {
         contentBox.getChildren().clear();
@@ -81,5 +100,15 @@ public class CartController {
     }
     public void removeTemplate(Parent template) {
         Platform.runLater(()->contentBox.getChildren().remove(template));
+    }
+    public void setMainController(UserController userController) {
+        this.userController = userController;
+    }
+    public void wiadomosc(String wiadomosc) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wiadomość");
+        alert.setHeaderText(null);
+        alert.setContentText(wiadomosc);
+        alert.showAndWait();
     }
 }

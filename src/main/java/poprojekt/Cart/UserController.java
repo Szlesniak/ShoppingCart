@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -31,13 +32,13 @@ public class UserController {
     public void initialize() {
         productsList = dataManager.shareProductList();
         currentUser = dataManager.getCurrentUser();
-        username.setText(currentUser.getLogin());
         refresh();
     }
 
     public void logout(ActionEvent event) {
         dataManager.setCurrentUser(null);
         changeScene(event, "strona.fxml");
+        wiadomosc("Wylogowano");
     }
     private void addProductToUI(Product product) {
         try {
@@ -45,7 +46,7 @@ public class UserController {
             Parent productNode = loader.load();
 
             SzablonController controller = loader.getController();
-            controller.setProductData(product.getName(),product.getDescription(), product.getPrice(), product.getAmount(), product.getPhoto() );
+            controller.setProductData(product.getName(),product.getDescription(), product.getPrice(), product.getAmount()-product.getBought(), product.getPhoto() );
 
             contentBox.getChildren().add(productNode);
         } catch (IOException e) {
@@ -73,6 +74,9 @@ public class UserController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("koszyk.fxml"));
             Parent root = loader.load();
 
+            CartController controller = loader.getController();
+            controller.setMainController(this);
+
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -87,5 +91,13 @@ public class UserController {
             addProductToUI(product);
         }
         currentUser = dataManager.getCurrentUser();
+        username.setText(currentUser.getName());
+    }
+    public void wiadomosc(String wiadomosc) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Wiadomość");
+        alert.setHeaderText(null);
+        alert.setContentText(wiadomosc);
+        alert.showAndWait();
     }
 }
