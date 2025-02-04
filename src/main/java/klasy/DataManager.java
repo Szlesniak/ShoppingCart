@@ -2,7 +2,11 @@ package klasy;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import javax.print.attribute.standard.JobStateReason;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DataManager {
     private static DataManager instace;
@@ -13,9 +17,10 @@ public class DataManager {
     private Salesman currentSalesman;
 
     private DataManager() {
+
         users = new ArrayList<>();
         salesmen = new ArrayList<>();
-        productList = FXCollections.observableArrayList();
+        productList = loadProductsFromCSV("C:/Users/szyml/IdeaProjects/ShoppingCarty/src/main/resources/Produkty.csv");
     }
 
     public static DataManager getInstance() {
@@ -47,6 +52,47 @@ public class DataManager {
 
     public ObservableList<Product> shareProductList() {
         return productList;
+    }
+
+    public void saveProductsToCSV(List<Product> products, String filePath) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath, true))) {
+            for (Product product : products) {
+                writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto());
+            }
+            System.out.println("Produkty zapisano do pliku: " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public ObservableList<Product> loadProductsFromCSV(String filePath) {
+        ObservableList<Product> products = FXCollections.observableArrayList();
+
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            boolean firstLine = true;
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+
+                String[] data = line.split(";");
+                    String name = data[0];
+                    double price = Double.parseDouble(data[1]);
+                    int stock = Integer.parseInt(data[2]);
+                    String description = data[3];
+                    String photo = data[4];
+
+
+
+                    products.add(new Product(name, price, stock, description, photo));
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return products;
     }
 
     public void setCurrentUser(User user) {

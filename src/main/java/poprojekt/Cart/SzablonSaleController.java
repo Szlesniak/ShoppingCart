@@ -59,7 +59,7 @@ public class SzablonSaleController {
     }
     DataManager dataManager = DataManager.getInstance();
     public void initialize() {
-        productsList = dataManager.shareProductList();
+        productsList = (dataManager.shareProductList());
     }
     public void refresh(){
         for (Product product : productsList) {

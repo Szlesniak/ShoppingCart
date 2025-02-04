@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import klasy.DataManager;
 import klasy.Product;
 
 public class ProductController {
@@ -24,7 +25,7 @@ public class ProductController {
     private Button AddProduct;
 
     public void addProduct(){
-        Product product = new Product(name.getText(), Double.parseDouble(prize.getText()), Integer.parseInt(amount.getText()), description.getText(), photo.getText());
+        Product product = new Product(name.getText(), Double.parseDouble(prize.getText()), Integer.parseInt(amount.getText()), description.getText(), name.getText() + ".jpg");
         SalesmanController.addProductToList(product);
         SalesmanController.addProductToUI(product);
         AddProduct.getScene().getWindow().hide();
