@@ -75,7 +75,6 @@ public class DataManager {
             for (Product product : products) {
                 writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto() + ";" + product.getSalesman().getLogin() + "\n");
             }
-            wiadomosc("Baza antywirusowa Avast zostałą zaktualizowana");
         } catch (IOException e) {
             e.printStackTrace();
         }

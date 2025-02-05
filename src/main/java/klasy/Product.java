@@ -1,10 +1,5 @@
 package klasy;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.List;
-
 public class Product {
     private int id;
     public String name;
@@ -13,7 +8,6 @@ public class Product {
     private String description;
     private String photo;
     private Salesman salesman;
-    public int bought = 0;
     public int sold = 0;
     public Product(String name, double price, int amount, String description, String photo) {
         this.name = name;
@@ -41,7 +35,7 @@ public class Product {
         amount = newAmount;
     }
     public double getTotalPrice() {
-        return price * bought;
+        return price;
     }
     public void addAmount(int amount) {
         this.amount += amount;
@@ -57,10 +51,6 @@ public class Product {
     }
     public String getPhoto() {
         return photo;
-    }
-    public void setBought(int newamount){
-        bought = newamount;
-
     }
     public void decreaseStock(int amount) {
         if (amount > 0 && amount <= this.amount) {
@@ -80,9 +70,6 @@ public class Product {
         return salesman;
     }
 
-    public int getBought(){
-        return bought;
-    }
     public int getSold(){
         return sold;
     }
