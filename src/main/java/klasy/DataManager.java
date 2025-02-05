@@ -24,9 +24,9 @@ public class DataManager {
     private User currentUser;
     private Salesman currentSalesman;
 
-    String workingDir = System.getProperty("user.dir");  // Pobiera katalog roboczy
-    String filePath = workingDir + "/Produkty.csv";  // Tworzy pełną ścieżkę do pliku
-    File file = new File(filePath);  // Tworzy obiekt pliku
+    String workingDir = System.getProperty("user.dir");
+    String filePath = workingDir + "/Produkty.csv";
+    File file = new File(filePath);
 
     private DataManager() {
 
