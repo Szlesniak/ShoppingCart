@@ -9,7 +9,6 @@ import klasy.DataManager;
 import klasy.Salesman;
 import klasy.User;
 
-import java.util.ArrayList;
 
 public class LoginController {
     private ObservableList<User> users;

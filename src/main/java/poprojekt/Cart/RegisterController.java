@@ -9,7 +9,6 @@ import klasy.DataManager;
 import klasy.Salesman;
 import klasy.User;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 

@@ -27,8 +27,8 @@ public class User extends Dane {
     public String getName() {
         return name;
     }
-    public void setOrders(ObservableList<Order> orders) {
-        this.orders = orders;
+    public void setOrder(Order order) {
+        orders.add(order);
     }
     public ObservableList<Order> getOrders() {
         return orders;

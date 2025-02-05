@@ -38,8 +38,8 @@ public class SzablonSaleController {
                 currentproduct = product;
             }
         }
-        dataManager.saveProductsToCSV(productsList);
         currentproduct.setAmount(currentproduct.getAmount() + Integer.parseInt(Dodaj.getText()));
+        dataManager.saveProductsToCSV(productsList);
         dataManager.wiadomosc("Dodano: " + Dodaj.getText() + " sztuk\n Produktu: " + currentproduct.getName());
 
         refresh();
@@ -93,11 +93,15 @@ public class SzablonSaleController {
             if (product.getName().equals(Name.getText())) {
                 productsList.remove(product);
                 salesman.getSalesmanProducts().remove(product);
+                dataManager.saveProductsToCSV(productsList);
                 dataManager.wiadomosc("Usunięto produkt: " + product.getName());
                 SalesmanController.refresh();
                 return;
             }
         }
+    }
+    public void setSalesmanController(SalesmanController salesmanController){
+        SalesmanController = salesmanController;
     }
 
 }

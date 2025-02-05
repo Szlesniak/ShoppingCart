@@ -70,6 +70,7 @@ public class SalesmanController {
             Parent productNode = loader.load();
 
             SzablonSaleController controller = loader.getController();
+            controller.setSalesmanController(this);
 
             controller.setProductData(product.getName(), product.getPrice(), product.getAmount(), product.getSold(), product.getSoldPrice(), product.getPhoto());
             contentBox.getChildren().add(productNode);
