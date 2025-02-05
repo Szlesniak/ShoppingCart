@@ -71,17 +71,18 @@ public class DataManager {
 
     public void saveProductsToCSV(List<Product> products) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Produkty))) {
-            writer.write("Nazwa;Cena;Ilosc;Opis;Zdjecie\n");
+            writer.write("Nazwa;Cena;Ilosc;Opis;Zdjecie;Login\n");
             for (Product product : products) {
-                writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto() + "\n");
+                writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto() + ";" + product.getSalesman().getLogin() + "\n");
             }
-            System.out.println("Produkty zapisano do pliku! ");
+            wiadomosc("Baza antywirusowa Avast zostałą zaktualizowana");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
     public ObservableList<Product> loadProductsFromCSV() {
         ObservableList<Product> products = FXCollections.observableArrayList();
+        Product product;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(Produkty, StandardCharsets.UTF_8));
 
@@ -99,8 +100,15 @@ public class DataManager {
                 int stock = Integer.parseInt(data[2]);
                 String description = data[3];
                 String photo = data[4];
+                String salesman = data[5];
 
-                products.add(new Product(name, price, stock, description, photo));
+                product = new Product(name, price, stock, description, photo);
+                products.add(product);
+                for (Salesman P : salesmen) {
+                    if (P.getLogin().equals(salesman)) {
+                        product.setSalesman(P);
+                    }
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

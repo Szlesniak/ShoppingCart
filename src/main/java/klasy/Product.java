@@ -12,6 +12,7 @@ public class Product {
     private int amount = 0;
     private String description;
     private String photo;
+    private Salesman salesman;
     public int bought = 0;
     public int sold = 0;
     public Product(String name, double price, int amount, String description, String photo) {
@@ -67,6 +68,16 @@ public class Product {
         } else {
             System.out.println("Błąd: Brak wystarczającej ilości produktu w Koszyku!");
         }
+    }
+    public void setSalesman(Salesman salesman){
+        this.salesman = salesman;
+        if (!salesman.getSalesmanProducts().contains(this)){
+            salesman.addProduct(this);
+        }
+    }
+
+    public Salesman getSalesman() {
+        return salesman;
     }
 
     public int getBought(){

@@ -39,7 +39,7 @@ public class SiteController {
     }
 
     public void initialize() {
-        productsList = (dataManager.shareProductList());
+        productsList = dataManager.shareProductList();
         contentBox.getChildren().clear();
         for (Product product : productsList) {
             addProductToUI(product);
