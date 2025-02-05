@@ -71,6 +71,7 @@
                               <Font name="System Bold" size="24.0" />
                            </font>
                         </Label>
+                        <Button onAction="#cancel" layoutX="106.0" layoutY="512.0" mnemonicParsing="false" text="Anuluj" />
                      </children></AnchorPane>
               </items>
             </SplitPane>

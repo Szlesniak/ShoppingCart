@@ -14,14 +14,22 @@ import klasy.DataManager;
 import klasy.Salesman;
 import klasy.User;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.stream.Stream;
 
 
 public class RegisterController {
+    private boolean matchloginuser = false;
+    private boolean matchloginsale = false;
+    private ArrayList<User> users;
+    private ArrayList<Salesman> salesmen;
     DataManager dataManager = DataManager.getInstance();
     @FXML
     private TextField userLogin;
     @FXML
     private PasswordField userPasswd;
+    @FXML
+    private PasswordField userPasswdRep;
     @FXML
     private TextField userName;
     @FXML
@@ -41,6 +49,8 @@ public class RegisterController {
     @FXML
     private PasswordField salePasswd;
     @FXML
+    private PasswordField salePasswdRep;
+    @FXML
     private TextField saleCompany;
     @FXML
     private TextField saleNIP;
@@ -55,9 +65,15 @@ public class RegisterController {
     @FXML
     private TextField saleNr;
 
+    public void initialize() {
+        users = dataManager.shareUserList();
+        salesmen = dataManager.shareSalesmanList();
+    }
+
     public void userRegister(ActionEvent event) {
         String login = userLogin.getText();
         String password = userPasswd.getText();
+        String passwordrep = userPasswdRep.getText();
         String name = userName.getText();
         String surname = userSurname.getText();
         String email = userEmail.getText();
@@ -65,16 +81,39 @@ public class RegisterController {
         String miasto = userCity.getText();
         String ulica = userRoad.getText();
         String nr_bud = userNr.getText();
-        User user = new User(login, password, name, surname, email, phone, miasto, ulica, nr_bud);
-        dataManager.addUser(user);
-        dataManager.setCurrentUser(user);
-        wiadomosc("Zarejestrowano nowe konto!");
-        changeScene(event, "zaloguj.fxml");
+        for (Salesman salesman : salesmen) {
+            if (salesman.getLogin().equals(login)) {
+                wiadomosc("Login zajęty!");
+                matchloginsale = true;
+                return;
+            }
+        }
+        for (User user : users) {
+            if (user.getLogin().equals(login)) {
+                wiadomosc("Login zajęty!");
+                matchloginuser = true;
+                return;
+            }
+        }
+        if (matchloginuser && matchloginsale) {
+            wiadomosc("Login zajęty!");
+        } else if (!password.equals(passwordrep)) {
+            wiadomosc("Hasła nie są takie same!");
+        } else if (Stream.of(login, password, name, surname, email, phone, miasto, ulica, nr_bud).anyMatch(String::isEmpty)) {
+            wiadomosc("Proszę wypełnić wszystkie pola!");
+        } else {
+            User user = new User(login, password, name, surname, email, phone, miasto, ulica, nr_bud);
+            dataManager.addUser(user);
+            dataManager.setCurrentUser(user);
+            wiadomosc("Zarejestrowano nowe konto!");
+            changeScene(event, "zaloguj.fxml");
+        }
     }
 
     public void saleRegister(ActionEvent event) {
         String login = saleLogin.getText();
         String password = salePasswd.getText();
+        String passwordrep = salePasswdRep.getText();
         String company = saleCompany.getText();
         String NIP = saleNIP.getText();
         String email = saleEmail.getText();
@@ -82,11 +121,33 @@ public class RegisterController {
         String miasto = saleCity.getText();
         String ulica = saleRoad.getText();
         String nr_bud = saleNr.getText();
-        Salesman salesman = new Salesman(login, password, company, NIP, email, phone, miasto, ulica, nr_bud);
-        dataManager.addSalesman(salesman);
-        dataManager.setCurrentSalesman(salesman);
-        wiadomosc("Zarejestrowano nowe konto!");
-        changeScene(event, "zaloguj.fxml");
+        for (Salesman salesman : salesmen) {
+            if (salesman.getLogin().equals(login)) {
+                wiadomosc("Login zajęty!");
+                matchloginsale = true;
+                return;
+            }
+        }
+        for (User user : users) {
+            if (user.getLogin().equals(login)) {
+                wiadomosc("Login zajęty!");
+                matchloginuser = true;
+                return;
+            }
+        }
+        if (matchloginuser && matchloginsale) {
+            wiadomosc("Login zajęty!");
+        } else if (!password.equals(passwordrep)) {
+            wiadomosc("Hasła nie są takie same!");
+        } else if (Stream.of(login, password, company, NIP, email, phone, miasto, ulica, nr_bud).anyMatch(String::isEmpty)) {
+            wiadomosc("Proszę wypełnić wszystkie pola!");
+        } else {
+            Salesman salesman = new Salesman(login, password, company, NIP, email, phone, miasto, ulica, nr_bud);
+            dataManager.addSalesman(salesman);
+            dataManager.setCurrentSalesman(salesman);
+            wiadomosc("Zarejestrowano nowe konto!");
+            changeScene(event, "zaloguj.fxml");
+        }
     }
     public void cancel(ActionEvent event){
         changeScene(event, "strona.fxml");

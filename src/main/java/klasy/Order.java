@@ -6,11 +6,17 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.io.IOException;
 
 public class Order extends Cart {
-    public String orderID;
+    public int orderID;
     public User user;
     public boolean finalized;
-    public Order(int orderID, User user){
+    public String paymentMethod;
+    public String deliveryMethod;
+    private String PDFpath;
+    public Order(int orderID, User user, String paymentMethod, String deliveryMethod) {
+        this.orderID = orderID;
         this.user = user;
+        this.paymentMethod = paymentMethod;
+        this.deliveryMethod = deliveryMethod;
     }
     public void setFinalized(boolean something){
         finalized = something;
@@ -27,11 +33,14 @@ public class Order extends Cart {
         System.out.println("Zamówienie zrealizowane! Ilość produktów w magazynie zaktualizowana.");
     }
 
-    public String getOrderId() {
+    public int getOrderId() {
         return orderID;
     }
+    public void setPDFpath(String path) {
+        this.PDFpath = path;
+    }
 
-    public static void createOrderPdf(String filePath, Order order) {
+    public void createOrderPdf(String filePath, Order order) {
         try (PDDocument document = new PDDocument()) {
             PDPage page = new PDPage();
             document.addPage(page);
@@ -59,9 +68,12 @@ public class Order extends Cart {
 
             contentStream.newLineAtOffset(0, -30);
             contentStream.showText("Suma: " + String.format("%.2f zł", order.user.cart.getTotalPrice()));
+            contentStream.showText("Metoda płatności: " + order.paymentMethod);
+            contentStream.showText("Metoda dostawy: " + order.deliveryMethod);
             contentStream.endText();
 
             contentStream.close();
+            setPDFpath(filePath);
             document.save(filePath);
         } catch (IOException e) {
             e.printStackTrace();

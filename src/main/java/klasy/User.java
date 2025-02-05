@@ -1,9 +1,12 @@
 package klasy;
 
+import javafx.collections.ObservableList;
+
 public class User extends Dane {
     private String name;
     private String surname;
     public Cart cart = new Cart();
+    private ObservableList<Order> orders;
     public User(String login, String password,String name, String surname, String email, String phone, String miasto, String ulica, String nr_bud) {
         this.password = password;
         this.login = login;
@@ -26,6 +29,12 @@ public class User extends Dane {
     }
     public String getName() {
         return name;
+    }
+    public void setOrders(ObservableList<Order> orders) {
+        this.orders = orders;
+    }
+    public ObservableList<Order> getOrders() {
+        return orders;
     }
 }
 

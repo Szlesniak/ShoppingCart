@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 public class Cart {
     private ObservableList<Product> cartProducts = FXCollections.observableArrayList();
+    private String paymentMethod;
+    private String deliveryMethod;
     public void addProduct(Product product, int amount) {
         cartProducts.add(product);
         product.setBought(amount);
@@ -37,5 +39,11 @@ public class Cart {
             l += product.bought;
         }
         return l;
+    }
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+    public void setDeliveryMethod(String deliveryMethod) {
+        this.deliveryMethod = deliveryMethod;
     }
 }

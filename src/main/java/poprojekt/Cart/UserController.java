@@ -77,6 +77,9 @@ public class UserController {
             CartController controller = loader.getController();
             controller.setMainController(this);
 
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+
             Stage stage = new Stage();
             Scene scene = new Scene(root);
             stage.setScene(scene);

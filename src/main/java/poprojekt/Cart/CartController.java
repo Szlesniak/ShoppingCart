@@ -3,19 +3,28 @@ package poprojekt.Cart;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import klasy.DataManager;
+import klasy.Order;
 import klasy.Product;
 import klasy.User;
 
+import java.io.IOException;
+
 public class CartController {
+    String paymentMethod;
+    String deliveryMethod;
     UserController userController;
     @FXML
     private ComboBox<String> platnosc;
@@ -45,8 +54,6 @@ public class CartController {
         currentuser = dataManager.getCurrentUser();
         productsList = currentuser.cart.getProducts();
         currentuser = dataManager.getCurrentUser();
-        String deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
-        String paymentMethod = platnosc.getSelectionModel().getSelectedItem();
         refresh();
         if (currentuser.cart.getProducts().isEmpty()){
             Clear.setDisable(true);
@@ -76,7 +83,12 @@ public class CartController {
     }
 
     public void order() {
-
+        setDeliveryMethod();
+        setPaymentMethod();
+        Order order = new Order(currentuser.getOrders().size()+1, currentuser, paymentMethod, deliveryMethod);
+        order.createOrderPdf("/Zamówienie" + order.getOrderId() +".pdf", order);
+        currentuser.getOrders().add(order);
+        order.finalizeOrder();
 
         wiadomosc("Zamówienie złożone!");
         clearcart();
@@ -110,5 +122,32 @@ public class CartController {
         alert.setHeaderText(null);
         alert.setContentText(wiadomosc);
         alert.showAndWait();
+    }
+    public void setPaymentMethod() {
+        paymentMethod = platnosc.getSelectionModel().getSelectedItem();
+        currentuser.cart.setPaymentMethod(paymentMethod);
+    }
+    public void setDeliveryMethod() {
+        deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
+        currentuser.cart.setDeliveryMethod(deliveryMethod);
+    }
+    public void cancel(ActionEvent event){
+        changeScene(event, "strona_zalog_user.fxml");
+    }
+    private void changeScene(ActionEvent event, String fxmlFile) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
+            Parent root = loader.load();
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+
+            Stage stage = new Stage();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
