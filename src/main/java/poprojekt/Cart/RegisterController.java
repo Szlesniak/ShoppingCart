@@ -86,6 +86,8 @@ public class RegisterController {
                 wiadomosc("Login zajęty!");
                 matchloginsale = true;
                 return;
+            } else {
+                matchloginsale = false;
             }
         }
         for (User user : users) {
@@ -93,9 +95,11 @@ public class RegisterController {
                 wiadomosc("Login zajęty!");
                 matchloginuser = true;
                 return;
+            } else {
+                matchloginuser = false;
             }
         }
-        if (matchloginuser && matchloginsale) {
+        if (matchloginuser || matchloginsale) {
             wiadomosc("Login zajęty!");
         } else if (!password.equals(passwordrep)) {
             wiadomosc("Hasła nie są takie same!");
@@ -126,6 +130,8 @@ public class RegisterController {
                 wiadomosc("Login zajęty!");
                 matchloginsale = true;
                 return;
+            } else {
+                matchloginsale = false;
             }
         }
         for (User user : users) {
@@ -133,9 +139,11 @@ public class RegisterController {
                 wiadomosc("Login zajęty!");
                 matchloginuser = true;
                 return;
+            } else {
+                matchloginuser = false;
             }
         }
-        if (matchloginuser && matchloginsale) {
+        if (matchloginuser || matchloginsale) {
             wiadomosc("Login zajęty!");
         } else if (!password.equals(passwordrep)) {
             wiadomosc("Hasła nie są takie same!");
