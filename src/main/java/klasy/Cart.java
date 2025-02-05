@@ -18,6 +18,10 @@ public class Cart {
         cartProducts.remove(product);
     }
     public void clearCart(){
+        for(Product product : cartProducts){
+            prods.put(product,0);
+        }
+        prods.clear();
         cartProducts.clear();
     }
     public ObservableList<Product> getProducts() {
@@ -33,7 +37,6 @@ public class Cart {
     public boolean isEmpty() {
         return cartProducts.isEmpty();
     }
-
     public int getIloscCart(Product product){
         return prods.getOrDefault(product,0);
     }

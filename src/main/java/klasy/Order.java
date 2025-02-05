@@ -6,9 +6,9 @@ import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import java.io.IOException;
 
 public class Order extends Cart {
+    DataManager dataManager = DataManager.getInstance();
     public int orderID;
     public User user;
-    public boolean finalized;
     public String paymentMethod;
     public String deliveryMethod;
     private String PDFpath;
@@ -18,19 +18,14 @@ public class Order extends Cart {
         this.paymentMethod = paymentMethod;
         this.deliveryMethod = deliveryMethod;
     }
-    public void setFinalized(boolean something){
-        finalized = something;
-    }
-    public boolean isFinalized(){
-        return finalized;    }
-
     public void finalizeOrder() {
         for (Product product : user.cart.getProducts()) {
             product.decreaseStock(user.cart.getIloscCart(product));
             user.cart.setCartProducts(product,0);
         }
         user.cart.clearCart();
-        System.out.println("Zamówienie zrealizowane! Ilość produktów w magazynie zaktualizowana.");
+        user.setOrder(this);
+        dataManager.wiadomosc("Zamówienie zrealizowane! Ilość produktów w magazynie zaktualizowana.");
     }
 
     public int getOrderId() {

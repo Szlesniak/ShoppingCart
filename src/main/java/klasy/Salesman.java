@@ -21,9 +21,6 @@ public class Salesman extends Dane {
     public void addProduct(Product product){
         SalesmanProducts.add(product);
     }
-    public void aktualizujIlosc(Product product, int ilosc){
-        product.setAmount(ilosc);
-    }
     public String getLogin() {
         return login;
     }
