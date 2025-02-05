@@ -47,6 +47,7 @@ public class CartController {
         dostawa.getItems().addAll(deliveryMethod1, deliveryMethod2, deliveryMethod3);
         currentuser = dataManager.getCurrentUser();
         productsList = currentuser.cart.getProducts();
+        currentuser = dataManager.getCurrentUser();
         refresh();
         if (currentuser.cart.getProducts().isEmpty()) {
             Clear.setDisable(true);
@@ -68,7 +69,7 @@ public class CartController {
             controller.setMainController(this);
             controller.setRoot(productNode);
 
-            controller.setProductData(product.getName(), currentuser.cart.getIloscCart(product), product.getPrice(), product.getPhoto());
+            controller.setProductData(product.getName(),currentuser.cart.getProds().get(product), product.getPrice(), product.getPhoto());
 
             contentBox.getChildren().add(productNode);
         } catch (Exception e) {
