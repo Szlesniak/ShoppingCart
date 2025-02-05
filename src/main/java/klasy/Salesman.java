@@ -50,4 +50,7 @@ public class Salesman extends Dane {
     public String getCompany_name() {
         return company_name;
     }
+    public String getNIP(){
+        return NIP;
+    }
 }

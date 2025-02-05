@@ -2,13 +2,6 @@ package klasy;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.stage.Stage;
 
 import javax.print.attribute.standard.JobStateReason;
 import java.io.*;
@@ -24,9 +17,9 @@ public class DataManager {
     private User currentUser;
     private Salesman currentSalesman;
 
-    String workingDir = System.getProperty("user.dir");
-    String filePath = workingDir + "/Produkty.csv";
-    File file = new File(filePath);
+    String workingDir = System.getProperty("user.dir");  // Pobiera katalog roboczy
+    String filePath = workingDir + "/Produkty.csv";  // Tworzy pełną ścieżkę do pliku
+    File file = new File(filePath);  // Tworzy obiekt pliku
 
     private DataManager() {
 
@@ -115,25 +108,5 @@ public class DataManager {
     }
     public Salesman getCurrentSalesman() {
         return currentSalesman;
-    }
-    public void changeScene(ActionEvent event, String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(DataManager.class.getResource(fxmlFile));
-            Parent root = loader.load();
-
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            Scene scene = new Scene(root);
-            currentStage.setScene(scene);
-            currentStage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void wiadomosc(String wiadomosc) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Wiadomość");
-        alert.setHeaderText(null);
-        alert.setContentText(wiadomosc);
-        alert.showAndWait();
     }
 }

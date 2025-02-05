@@ -1,5 +1,6 @@
 package poprojekt.Cart;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -11,8 +12,8 @@ import klasy.User;
 import java.util.ArrayList;
 
 public class LoginController {
-    private ArrayList<User> users = new ArrayList<>();
-    private ArrayList<Salesman> salesmen = new ArrayList<>();
+    private ObservableList<User> users;
+    private ObservableList<Salesman> salesmen;
     DataManager dataManager = DataManager.getInstance();
 
     @FXML
