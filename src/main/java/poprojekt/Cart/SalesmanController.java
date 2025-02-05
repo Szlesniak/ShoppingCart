@@ -3,10 +3,8 @@ package poprojekt.Cart;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -72,7 +70,6 @@ public class SalesmanController {
             Parent productNode = loader.load();
 
             SzablonSaleController controller = loader.getController();
-            controller.setSalesmanController(this);
 
             controller.setProductData(product.getName(), product.getPrice(), product.getAmount(), product.getSold(), product.getSoldPrice(), product.getPhoto());
             contentBox.getChildren().add(productNode);
@@ -84,39 +81,14 @@ public class SalesmanController {
 
     public void logout(ActionEvent event) {
         dataManager.setCurrentUser(null);
-        changeScene(event, "strona.fxml");
-        wiadomosc("Wylogowano");
-    }
-
-    private void changeScene(ActionEvent event, String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
-
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        dataManager.changeScene(event, "/poprojekt/Cart/strona.fxml");
+        dataManager.wiadomosc("Wylogowano");
     }
 
     public void initialize() {
         username.setText(dataManager.getCurrentSalesman().getCompany_name());
         salesman = dataManager.getCurrentSalesman();
         refresh();
-    }
-
-    public void wiadomosc(String wiadomosc) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Wiadomość");
-        alert.setHeaderText(null);
-        alert.setContentText(wiadomosc);
-        alert.showAndWait();
     }
 
     public void refresh() {

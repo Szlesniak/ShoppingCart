@@ -6,21 +6,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import klasy.DataManager;
 import klasy.Order;
 import klasy.Product;
 import klasy.User;
-
-import java.io.IOException;
 
 public class CartController {
     String paymentMethod;
@@ -55,7 +49,7 @@ public class CartController {
         productsList = currentuser.cart.getProducts();
         currentuser = dataManager.getCurrentUser();
         refresh();
-        if (currentuser.cart.getProducts().isEmpty()){
+        if (currentuser.cart.getProducts().isEmpty()) {
             Clear.setDisable(true);
             platnosc.setDisable(true);
             dostawa.setDisable(true);
@@ -65,6 +59,7 @@ public class CartController {
             dostawa.setDisable(false);
         }
     }
+
     private void addProductToUI(Product product) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("szablon_produkt_koszyk.fxml"));
@@ -74,7 +69,7 @@ public class CartController {
             controller.setMainController(this);
             controller.setRoot(productNode);
 
-            controller.setProductData(product.getName(), product.getBought(), product.getPrice(), product.getPhoto() );
+            controller.setProductData(product.getName(), product.getBought(), product.getPrice(), product.getPhoto());
 
             contentBox.getChildren().add(productNode);
         } catch (Exception e) {
@@ -85,23 +80,24 @@ public class CartController {
     public void order() {
         setDeliveryMethod();
         setPaymentMethod();
-        Order order = new Order(currentuser.getOrders().size()+1, currentuser, paymentMethod, deliveryMethod);
-        order.createOrderPdf("/Zamówienie" + order.getOrderId() +".pdf", order);
+        Order order = new Order(currentuser.getOrders().size() + 1, currentuser, paymentMethod, deliveryMethod);
+        order.createOrderPdf("/Zamówienie" + order.getOrderId() + ".pdf", order);
         currentuser.getOrders().add(order);
         order.finalizeOrder();
-
-        wiadomosc("Zamówienie złożone!");
+        dataManager.wiadomosc("Zamówienie złożone!");
         clearcart();
     }
+
     public void clearcart() {
         if (currentuser.cart.getProducts().isEmpty()) {
-            wiadomosc("Koszyk jest pusty nie ma czego usuwać!");
+            dataManager.wiadomosc("Koszyk jest pusty nie ma czego usuwać!");
             return;
         }
         currentuser.cart.clearCart();
         refresh();
         userController.refresh();
     }
+
     public void refresh() {
         contentBox.getChildren().clear();
         productsList = currentuser.cart.getProducts();
@@ -110,44 +106,26 @@ public class CartController {
         }
         prize.setText(Double.toString(currentuser.cart.getTotalPrice()));
     }
+
     public void removeTemplate(Parent template) {
-        Platform.runLater(()->contentBox.getChildren().remove(template));
+        Platform.runLater(() -> contentBox.getChildren().remove(template));
     }
+
     public void setMainController(UserController userController) {
         this.userController = userController;
     }
-    public void wiadomosc(String wiadomosc) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Wiadomość");
-        alert.setHeaderText(null);
-        alert.setContentText(wiadomosc);
-        alert.showAndWait();
-    }
+
     public void setPaymentMethod() {
         paymentMethod = platnosc.getSelectionModel().getSelectedItem();
         currentuser.cart.setPaymentMethod(paymentMethod);
     }
+
     public void setDeliveryMethod() {
         deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
         currentuser.cart.setDeliveryMethod(deliveryMethod);
     }
-    public void cancel(ActionEvent event){
-        changeScene(event, "strona_zalog_user.fxml");
-    }
-    private void changeScene(ActionEvent event, String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
 
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void cancel(ActionEvent event) {
+        dataManager.changeScene(event, "/poprojekt/Cart/strona_zalog_user.fxml");
     }
 }

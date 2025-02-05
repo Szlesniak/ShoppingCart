@@ -2,18 +2,12 @@ package poprojekt.Cart;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import klasy.DataManager;
 import klasy.Salesman;
 import klasy.User;
-import java.io.IOException;
+
 import java.util.ArrayList;
 import java.util.stream.Stream;
 
@@ -83,7 +77,7 @@ public class RegisterController {
         String nr_bud = userNr.getText();
         for (Salesman salesman : salesmen) {
             if (salesman.getLogin().equals(login)) {
-                wiadomosc("Login zajęty!");
+                dataManager.wiadomosc("Login zajęty!");
                 matchloginsale = true;
                 return;
             } else {
@@ -92,7 +86,7 @@ public class RegisterController {
         }
         for (User user : users) {
             if (user.getLogin().equals(login)) {
-                wiadomosc("Login zajęty!");
+                dataManager.wiadomosc("Login zajęty!");
                 matchloginuser = true;
                 return;
             } else {
@@ -100,17 +94,17 @@ public class RegisterController {
             }
         }
         if (matchloginuser || matchloginsale) {
-            wiadomosc("Login zajęty!");
+            dataManager.wiadomosc("Login zajęty!");
         } else if (!password.equals(passwordrep)) {
-            wiadomosc("Hasła nie są takie same!");
+            dataManager.wiadomosc("Hasła nie są takie same!");
         } else if (Stream.of(login, password, name, surname, email, phone, miasto, ulica, nr_bud).anyMatch(String::isEmpty)) {
-            wiadomosc("Proszę wypełnić wszystkie pola!");
+            dataManager.wiadomosc("Proszę wypełnić wszystkie pola!");
         } else {
             User user = new User(login, password, name, surname, email, phone, miasto, ulica, nr_bud);
             dataManager.addUser(user);
             dataManager.setCurrentUser(user);
-            wiadomosc("Zarejestrowano nowe konto!");
-            changeScene(event, "zaloguj.fxml");
+            dataManager.wiadomosc("Zarejestrowano nowe konto!");
+            dataManager.changeScene(event, "/poprojekt/Cart/zaloguj.fxml");
         }
     }
 
@@ -127,7 +121,7 @@ public class RegisterController {
         String nr_bud = saleNr.getText();
         for (Salesman salesman : salesmen) {
             if (salesman.getLogin().equals(login)) {
-                wiadomosc("Login zajęty!");
+                dataManager.wiadomosc("Login zajęty!");
                 matchloginsale = true;
                 return;
             } else {
@@ -136,7 +130,7 @@ public class RegisterController {
         }
         for (User user : users) {
             if (user.getLogin().equals(login)) {
-                wiadomosc("Login zajęty!");
+                dataManager.wiadomosc("Login zajęty!");
                 matchloginuser = true;
                 return;
             } else {
@@ -144,43 +138,21 @@ public class RegisterController {
             }
         }
         if (matchloginuser || matchloginsale) {
-            wiadomosc("Login zajęty!");
+            dataManager.wiadomosc("Login zajęty!");
         } else if (!password.equals(passwordrep)) {
-            wiadomosc("Hasła nie są takie same!");
+            dataManager.wiadomosc("Hasła nie są takie same!");
         } else if (Stream.of(login, password, company, NIP, email, phone, miasto, ulica, nr_bud).anyMatch(String::isEmpty)) {
-            wiadomosc("Proszę wypełnić wszystkie pola!");
+            dataManager.wiadomosc("Proszę wypełnić wszystkie pola!");
         } else {
             Salesman salesman = new Salesman(login, password, company, NIP, email, phone, miasto, ulica, nr_bud);
             dataManager.addSalesman(salesman);
             dataManager.setCurrentSalesman(salesman);
-            wiadomosc("Zarejestrowano nowe konto!");
-            changeScene(event, "zaloguj.fxml");
+            dataManager.wiadomosc("Zarejestrowano nowe konto!");
+            dataManager.changeScene(event, "/poprojekt/Cart/zaloguj.fxml");
         }
     }
-    public void cancel(ActionEvent event){
-        changeScene(event, "strona.fxml");
-    }
-    private void changeScene(ActionEvent event, String fxmlFile) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = loader.load();
 
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
-
-            Stage stage = new Stage();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void wiadomosc(String wiadomosc) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Wiadomosc");
-        alert.setHeaderText(null);
-        alert.setContentText(wiadomosc);
-        alert.showAndWait();
+    public void cancel(ActionEvent event) {
+        dataManager.changeScene(event, "/poprojekt/Cart/strona.fxml");
     }
 }
