@@ -12,7 +12,7 @@ public class Cart {
     private HashMap<Product, Integer> prods = new HashMap<>();
     public void addProduct(Product product, int amount) {
         cartProducts.add(product);
-        product.setBought(amount);
+        prods.put(product, amount);
     }
     public void removeProduct(Product product) {
         cartProducts.remove(product);
@@ -30,17 +30,13 @@ public class Cart {
         }
         return totalPrice;
     }
+    public HashMap<Product, Integer> getProds() {
+        return prods;
+    }
     public boolean isEmpty() {
         return cartProducts.isEmpty();
     }
 
-    public int iloscProduktów(){
-        int l = 0;
-        for (Product product : cartProducts) {
-            l += product.bought;
-        }
-        return l;
-    }
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }

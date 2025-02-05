@@ -69,7 +69,7 @@ public class CartController {
             controller.setMainController(this);
             controller.setRoot(productNode);
 
-            controller.setProductData(product.getName(), product.getBought(), product.getPrice(), product.getPhoto());
+            controller.setProductData(product.getName(),currentuser.cart.getProds().get(product), product.getPrice(), product.getPhoto());
 
             contentBox.getChildren().add(productNode);
         } catch (Exception e) {

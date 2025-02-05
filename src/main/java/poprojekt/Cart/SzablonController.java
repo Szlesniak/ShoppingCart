@@ -61,7 +61,7 @@ public class SzablonController {
             } else {
                 for (Product products : currentuser.cart.getProducts()) {
                     if (products.getName().equals(currentproduct.getName())) {
-                        currentproduct.setBought(currentproduct.getBought() + amount);
+                        currentuser.cart.getProds().put(currentproduct, currentuser.cart.getProds().get(products) + amount);
                         dataManager.wiadomosc("Dodano do koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
                         refresh();
                         return;
@@ -101,7 +101,7 @@ public class SzablonController {
         if (currentuser == null) {
             availability = currentproduct.getAmount();
         } else {
-            Availability.setText(Integer.toString(currentproduct.getAmount() - currentproduct.getBought()));
+            Availability.setText(Integer.toString(currentproduct.getAmount() - currentuser.cart.getProds().getOrDefault(currentproduct, 0)));
         }
         availability = Integer.parseInt(Availability.getText());
     }
