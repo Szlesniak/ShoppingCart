@@ -3,12 +3,13 @@ package klasy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Cart {
     private ObservableList<Product> cartProducts = FXCollections.observableArrayList();
     private String paymentMethod;
     private String deliveryMethod;
+    private HashMap<Product, Integer> prods = new HashMap<>();
     public void addProduct(Product product, int amount) {
         cartProducts.add(product);
         product.setBought(amount);
