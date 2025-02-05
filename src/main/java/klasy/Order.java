@@ -26,8 +26,8 @@ public class Order extends Cart {
 
     public void finalizeOrder() {
         for (Product product : user.cart.getProducts()) {
-            product.decreaseStock(product.getBought());
-            product.setBought(0);
+            product.decreaseStock(user.cart.getIloscCart(product));
+            user.cart.setCartProducts(product,0);
         }
         user.cart.clearCart();
         System.out.println("Zamówienie zrealizowane! Ilość produktów w magazynie zaktualizowana.");
@@ -59,7 +59,7 @@ public class Order extends Cart {
             for (Product item : order.user.cart.getProducts()) {
                 String row = String.format("%s\t%d\t%.2f zł",
                         item.getName(),
-                        item.getBought(),
+                        user.cart.getIloscCart(item),
                         item.getPrice()
                 );
                 contentStream.showText(row);

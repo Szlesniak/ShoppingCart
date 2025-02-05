@@ -43,7 +43,7 @@ public class UserController {
             Parent productNode = loader.load();
 
             SzablonController controller = loader.getController();
-            controller.setProductData(product.getName(), product.getDescription(), product.getPrice(), product.getAmount() - product.getBought(), product.getPhoto());
+            controller.setProductData(product.getName(), product.getDescription(), product.getPrice(), product.getAmount() - currentUser.cart.getIloscCart(product), product.getPhoto());
 
             contentBox.getChildren().add(productNode);
         } catch (IOException e) {

@@ -37,9 +37,6 @@ public class Product {
     public double getTotalPrice() {
         return price;
     }
-    public void addAmount(int amount) {
-        this.amount += amount;
-    }
     public void subAmount(int amount) {
         this.amount -= amount;
     }
@@ -56,7 +53,7 @@ public class Product {
         if (amount > 0 && amount <= this.amount) {
             this.amount -= amount;
         } else {
-            System.out.println("Błąd: Brak wystarczającej ilości produktu w Koszyku!");
+            System.out.println("Brak wystarczającej ilości produktu w Koszyku!");
         }
     }
     public void setSalesman(Salesman salesman){

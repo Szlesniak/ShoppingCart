@@ -45,12 +45,12 @@ public class SzablonKoszController {
                     } else {
                         amount = Integer.parseInt(Delete.getText());
                     }
-                    currentproduct.setBought(currentproduct.getBought() - amount);
-                    Amount.setText(Integer.toString(currentproduct.getBought()));
+                    currentuser.cart.setCartProducts(currentproduct,currentuser.cart.getIloscCart(currentproduct) - amount);
+                    Amount.setText(Integer.toString(currentuser.cart.getIloscCart(currentproduct)));
                     dataManager.wiadomosc("Usunięto z koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
                 }
             }
-            if (currentproduct.getBought() <= 0 && mainController != null && root != null) {
+            if (currentuser.cart.getIloscCart(currentproduct) <= 0 && mainController != null && root != null) {
                 currentcart.removeProduct(currentproduct);
                 mainController.removeTemplate(root);
             }
@@ -62,7 +62,6 @@ public class SzablonKoszController {
     public void initialize() {
         currentuser = dataManager.getCurrentUser();
         currentcart = currentuser.cart;
-        ;
         CartProductList = currentcart.getProducts();
     }
 
@@ -75,7 +74,7 @@ public class SzablonKoszController {
 
     private void refresh() {
         Name.setText(currentproduct.getName());
-        Amount.setText(Integer.toString(currentproduct.getBought()));
+        Amount.setText(Integer.toString(currentuser.cart.getIloscCart(currentproduct)));
         Prize.setText(Double.toString(currentproduct.getPrice()));
     }
 
