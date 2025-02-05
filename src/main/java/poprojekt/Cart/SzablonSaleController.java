@@ -103,5 +103,4 @@ public class SzablonSaleController {
     public void setSalesmanController(SalesmanController salesmanController){
         SalesmanController = salesmanController;
     }
-
 }
