@@ -41,6 +41,7 @@ public class SzablonSaleController {
         }
         currentproduct.setAmount(currentproduct.getAmount()+Integer.parseInt(Dodaj.getText()));
         wiadomosc("Dodano: " + Dodaj.getText() + " sztuk\n Produktu: " + currentproduct.getName());
+        dataManager.saveProductsToCSV(productsList);
         refresh();
     }
     public void zmien(){
@@ -51,6 +52,7 @@ public class SzablonSaleController {
         }
         currentproduct.setPrice(Double.parseDouble(Zmien.getText()));
         wiadomosc("Zmieniono cenę produktu: " + currentproduct.getName() + " na: " + Zmien.getText());
+        dataManager.saveProductsToCSV(productsList);
         refresh();
     }
     public void setProductData(String name,Double cena, int amount, int soldamount,double soldprize, String photo){

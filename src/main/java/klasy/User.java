@@ -21,12 +21,9 @@ public class User extends Dane {
     public void setCart(Cart cart){
         this.cart = cart;
     }
-    public String getLogin() {
-        return login;
-    }
-    public String getPassword() {
-        return password;
-    }
+
+    public String getSurname() {return surname;}
+
     public String getName() {
         return name;
     }

@@ -3,7 +3,6 @@ package klasy;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import javax.print.attribute.standard.JobStateReason;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -11,20 +10,24 @@ import java.util.List;
 
 public class DataManager {
     private static DataManager instace;
-    private ArrayList<User> users;
-    private ArrayList<Salesman> salesmen;
+    private ObservableList<User> users;
+    private ObservableList<Salesman> salesmen;
     private ObservableList<Product> productList;
     private User currentUser;
     private Salesman currentSalesman;
 
     String workingDir = System.getProperty("user.dir");  // Pobiera katalog roboczy
-    String filePath = workingDir + "/Produkty.csv";  // Tworzy pełną ścieżkę do pliku
-    File file = new File(filePath);  // Tworzy obiekt pliku
+    String ProduktyPath = workingDir + "/Produkty.csv";  // Tworzy pełną ścieżkę do pliku
+    File Produkty = new File(ProduktyPath);  // Tworzy obiekt pliku
+    String SalesmenPath = workingDir + "/Salesmen.csv";
+    File SalesmenFile = new File(SalesmenPath);
+    String UsersPath = workingDir + "/Users.csv";
+    File Users = new File(UsersPath);
 
     private DataManager() {
 
-        users = new ArrayList<>();
-        salesmen = new ArrayList<>();
+        users = loadUsersFromCSV();
+        salesmen = loadSalesmenFromCSV();
         productList = loadProductsFromCSV();
     }
 
@@ -39,7 +42,7 @@ public class DataManager {
         users.add(user);
     }
 
-    public ArrayList<User> shareUserList() {
+    public ObservableList<User> shareUserList() {
         return users;
     }
 
@@ -47,7 +50,7 @@ public class DataManager {
         salesmen.add(salesman);
     }
 
-    public ArrayList<Salesman> shareSalesmanList() {
+    public ObservableList<Salesman> shareSalesmanList() {
         return salesmen;
     }
 
@@ -60,7 +63,8 @@ public class DataManager {
     }
 
     public void saveProductsToCSV(List<Product> products) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Produkty))) {
+            writer.write("Nazwa;Cena;Ilosc;Opis;Zdjecie\n");
             for (Product product : products) {
                 writer.write(product.getName() + ";" + product.getPrice() + ";" + product.getAmount() + ";" + product.getDescription() + ";" + product.getPhoto() + "\n");
             }
@@ -72,7 +76,7 @@ public class DataManager {
     public ObservableList<Product> loadProductsFromCSV() {
         ObservableList<Product> products = FXCollections.observableArrayList();
         try {
-            BufferedReader reader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8));
+            BufferedReader reader = new BufferedReader(new FileReader(Produkty, StandardCharsets.UTF_8));
 
             String line;
             boolean firstLine = true;
@@ -95,6 +99,94 @@ public class DataManager {
             e.printStackTrace();
         }
         return products;
+    }
+    public void saveSalesmenToCSV() {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(SalesmenFile))){
+            writer.write("login,password,company_name,NIP,email,phone,miasto,ulica,nr_bud\n");
+            for(Salesman salesman : salesmen){
+                writer.write(salesman.getLogin() + ";" + salesman.getPassword() + ";" + salesman.getCompany_name() + ";" + salesman.getNIP() + ";" + salesman.getEmail() + ";" + salesman.getPhone() + ";" + salesman.getMiasto() + ";" + salesman.getUlica() + ";" + salesman.getNr_bud() + "\n");
+            }
+
+        } catch (IOException r){
+            r.printStackTrace();
+        }
+
+    }
+    public ObservableList<Salesman> loadSalesmenFromCSV() {
+        ObservableList<Salesman> salesm = FXCollections.observableArrayList();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(SalesmenFile, StandardCharsets.UTF_8));
+
+            String line;
+            boolean firstLine = true;
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+                String[] data = line.split(";");
+                String login = data[0];
+                String password = data[1];
+                String company_name = data[2];
+                String NIP = data[3];
+                String email = data[4];
+                String phone = data[5];
+                String miasto = data[6];
+                String ulica = data[7];
+                String nr_bud = data[8];
+
+
+                salesm.add(new Salesman(login, password, company_name, NIP, email,phone,miasto,ulica,nr_bud));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return salesm;
+    }
+    public void saveUsersToCSV() {
+        try(BufferedWriter writer = new BufferedWriter(new FileWriter(Users))){
+            writer.write("login,password,name,surname,email,phone,miasto,ulica,nr_bud\n");
+            for(User user : users){
+                writer.write(user.getLogin() + ";" + user.getPassword() + ";" + user.getName() + ";" + user.getSurname() + ";" + user.getEmail() + ";" + user.getPhone() + ";" + user.getMiasto() + ";" + user.getUlica() + ";" + user.getNr_bud() + "\n");
+            }
+
+        } catch (IOException r){
+            r.printStackTrace();
+        }
+
+    }
+    public ObservableList<User> loadUsersFromCSV() {
+        ObservableList<User> usr = FXCollections.observableArrayList();
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(Users, StandardCharsets.UTF_8));
+
+            String line;
+            boolean firstLine = true;
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+                String[] data = line.split(";");
+                String login = data[0];
+                String password = data[1];
+                String name = data[2];
+                String surname = data[3];
+                String email = data[4];
+                String phone = data[5];
+                String miasto = data[6];
+                String ulica = data[7];
+                String nr_bud = data[8];
+
+
+                usr.add(new User(login, password, name, surname, email,phone,miasto,ulica,nr_bud));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return usr;
     }
 
     public void setCurrentUser(User user) {

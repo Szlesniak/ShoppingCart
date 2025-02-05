@@ -1,5 +1,6 @@
 package poprojekt.Cart;
 
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,8 +22,8 @@ import java.util.stream.Stream;
 public class RegisterController {
     private boolean matchloginuser = false;
     private boolean matchloginsale = false;
-    private ArrayList<User> users;
-    private ArrayList<Salesman> salesmen;
+    private ObservableList<User> users;
+    private ObservableList<Salesman> salesmen;
     DataManager dataManager = DataManager.getInstance();
     @FXML
     private TextField userLogin;
@@ -108,6 +109,7 @@ public class RegisterController {
         } else {
             User user = new User(login, password, name, surname, email, phone, miasto, ulica, nr_bud);
             dataManager.addUser(user);
+            dataManager.saveUsersToCSV();
             dataManager.setCurrentUser(user);
             wiadomosc("Zarejestrowano nowe konto!");
             changeScene(event, "zaloguj.fxml");
@@ -152,6 +154,7 @@ public class RegisterController {
         } else {
             Salesman salesman = new Salesman(login, password, company, NIP, email, phone, miasto, ulica, nr_bud);
             dataManager.addSalesman(salesman);
+            dataManager.saveSalesmenToCSV();
             dataManager.setCurrentSalesman(salesman);
             wiadomosc("Zarejestrowano nowe konto!");
             changeScene(event, "zaloguj.fxml");
