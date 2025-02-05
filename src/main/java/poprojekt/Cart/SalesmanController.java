@@ -58,8 +58,8 @@ public class SalesmanController {
     }
 
     public void addProductToList(Product product) {
+        product.setSalesman(salesman);
         dataManager.addProduct(product);
-        salesman.addProduct(product);
         refresh();
         dataManager.saveProductsToCSV(dataManager.shareProductList());
     }
