@@ -11,6 +11,7 @@ public class Order extends Cart {
     public User user;
     public String paymentMethod;
     public String deliveryMethod;
+
     private String PDFpath;
     public Order(int orderID, User user, String paymentMethod, String deliveryMethod) {
         this.orderID = orderID;
@@ -41,29 +42,49 @@ public class Order extends Cart {
             document.addPage(page);
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
-
-            contentStream.setFont(PDType1Font.HELVETICA_BOLD, 18);
-            contentStream.beginText();
-            contentStream.newLineAtOffset(100, 700);
-            contentStream.showText("Zamówienie nr " + order.getOrderId());
-            contentStream.endText();
-
-            contentStream.showText("Nazwa produktu\tIlość\tCena");
-            contentStream.newLineAtOffset(0, -15);
-
-            for (Product item : order.user.cart.getProducts()) {
-                String row = String.format("%s\t%d\t%.2f zł",
-                        item.getName(),
-                        user.cart.getIloscCart(item),
-                        item.getPrice()
-                );
-                contentStream.showText(row);
-                contentStream.newLineAtOffset(0, -15);
+            try {
+                contentStream.setFont(PDType1Font.HELVETICA, 12);
+            } catch (IOException e) {
+                System.err.println("Error setting font: " + e.getMessage());
+                contentStream.setFont(PDType1Font.COURIER, 12);
             }
 
-            contentStream.newLineAtOffset(0, -30);
-            contentStream.showText("Suma: " + String.format("%.2f zł", order.user.cart.getTotalPrice()));
-            contentStream.showText("Metoda płatności: " + order.paymentMethod);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(100, 700);
+            contentStream.showText("Zamowienie nr " + order.getOrderId());
+            contentStream.endText();
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(100, 685);
+            contentStream.showText("Nazwa produktu    Ilosc    Cena");
+            contentStream.endText();
+
+            int yOffset = 670;
+            for (Product item : order.user.cart.getProducts()) {
+                String row = String.format("%-20s %-10d %.2f zl",
+                        item.getName(),
+                        order.user.cart.getIloscCart(item),
+                        item.getPrice()
+                );
+                contentStream.beginText();
+                contentStream.newLineAtOffset(100, yOffset);
+                contentStream.showText(row);
+                contentStream.endText();
+                yOffset -= 15;
+            }
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(100, yOffset - 30);
+            contentStream.showText("Suma: " + String.format("%.2f zl", order.user.cart.getTotalPrice()));
+            contentStream.endText();
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(100, yOffset - 45);
+            contentStream.showText("Metoda platnosci: " + order.paymentMethod);
+            contentStream.endText();
+
+            contentStream.beginText();
+            contentStream.newLineAtOffset(100, yOffset - 60);
             contentStream.showText("Metoda dostawy: " + order.deliveryMethod);
             contentStream.endText();
 
