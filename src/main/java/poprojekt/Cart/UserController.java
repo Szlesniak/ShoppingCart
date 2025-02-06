@@ -5,9 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import klasy.DataManager;
 import klasy.Product;
 import klasy.User;
@@ -52,7 +55,20 @@ public class UserController {
     }
 
     public void Koszyk(ActionEvent event) {
-        dataManager.changeScene(event, "/poprojekt/Cart/koszyk.fxml");
+        try {
+            FXMLLoader loader = new FXMLLoader(DataManager.class.getResource("koszyk.fxml"));
+            Parent root = loader.load();
+
+            CartController controller = loader.getController();
+            controller.setMainController(this);
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            Scene scene = new Scene(root);
+            currentStage.setScene(scene);
+            currentStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     void refresh() {
