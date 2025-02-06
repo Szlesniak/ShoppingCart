@@ -56,7 +56,7 @@ public class UserController {
 
     public void Koszyk(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(DataManager.class.getResource("koszyk.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("koszyk.fxml"));
             Parent root = loader.load();
 
             CartController controller = loader.getController();
