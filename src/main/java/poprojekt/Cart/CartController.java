@@ -80,7 +80,9 @@ public class CartController {
         setDeliveryMethod();
         setPaymentMethod();
         Order order = new Order(currentuser.getOrders().size() + 1, currentuser, paymentMethod, deliveryMethod);
-        order.createOrderPdf("/Zamówienie" + order.getOrderId() + ".pdf", order);
+        String workingDir = System.getProperty("user.dir");
+        String PdfPath = workingDir + "/Zamówienie";
+        order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
         currentuser.getOrders().add(order);
         order.finalizeOrder();
         dataManager.wiadomosc("Zamówienie złożone!");

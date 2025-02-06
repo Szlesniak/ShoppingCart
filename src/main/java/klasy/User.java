@@ -1,6 +1,8 @@
 package klasy;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableListBase;
 
 public class User extends Dane {
     private String name;
@@ -17,6 +19,8 @@ public class User extends Dane {
         this.miasto = miasto;
         this.ulica = ulica;
         this.nr_bud = nr_bud;
+        this.orders = FXCollections.observableArrayList();
+
     }
     public void setCart(Cart cart){
         this.cart = cart;
