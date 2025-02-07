@@ -96,12 +96,13 @@ public class CartController {
         setPaymentMethod();
         if (paymentMethod != null && deliveryMethod != null) {
             Order order = new Order(dataManager.shareOrderList().size() + 1, paymentMethod, deliveryMethod);
-            dataManager.addOrder(order);
             dataManager.saveOrdersToCSV(orders);
             order.setUser(currentuser);
             String workingDir = System.getProperty("user.dir");
             String PdfPath = workingDir + "/Zamówienie";
             order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
+            dataManager.shareOrderList().add(order);
+            dataManager.saveOrdersToCSV(dataManager.shareOrderList());
             order.finalizeOrder();
             dataManager.saveProductsToCSV(dataManager.shareProductList());
             refresh();
