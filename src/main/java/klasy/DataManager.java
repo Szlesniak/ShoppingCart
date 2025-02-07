@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -22,6 +23,7 @@ public class DataManager {
     private ObservableList<Order> orders;
     private User currentUser;
     private Salesman currentSalesman;
+    Product currentproduct;
 
     String workingDir = System.getProperty("user.dir");
     String ProduktyPath = workingDir + "/Produkty.csv";
@@ -30,16 +32,26 @@ public class DataManager {
     File SalesmenFile = new File(SalesmenPath);
     String UsersPath = workingDir + "/Users.csv";
     File Users = new File(UsersPath);
-    String OrdersPath = workingDir + "/Zamówienia.csv";
+    String OrdersPath = workingDir + "/zamówienia.csv";
     File Orders = new File(OrdersPath);
 
-
     private DataManager() {
-
-        users = loadUsersFromCSV();
-        salesmen = loadSalesmenFromCSV();
-        productList = loadProductsFromCSV();
-        orders = loadOrdersFromCSV();
+        try {
+            users = loadUsersFromCSV();
+        } catch (Exception e){users = FXCollections.observableArrayList();}
+        try {
+            salesmen = loadSalesmenFromCSV();
+        } catch (Exception e){
+            salesmen = FXCollections.observableArrayList();
+        }
+        try {
+            productList = loadProductsFromCSV();
+        } catch (Exception e) {productList = FXCollections.observableArrayList();}
+        try {
+            orders = loadOrdersFromCSV();
+        } catch (Exception e) {
+            orders = FXCollections.observableArrayList();
+        }
     }
 
     public static DataManager getInstance() {
@@ -51,9 +63,6 @@ public class DataManager {
 
     public void addUser(User user) {
         users.add(user);
-    }
-    public void addOrder(Order order) {
-        orders.add(order);
     }
 
     public ObservableList<User> shareUserList() {
@@ -74,9 +83,6 @@ public class DataManager {
 
     public ObservableList<Product> shareProductList() {
         return productList;
-    }
-    public ObservableList<Order> shareOrderList() {
-        return orders;
     }
 
     public void saveProductsToCSV(List<Product> products) {
@@ -216,7 +222,7 @@ public class DataManager {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Orders))) {
             writer.write("Nazwa;Cena;Ilosc;Opis;Zdjecie;Login\n");
             for (Order order : orders) {
-                writer.write(String.valueOf(order.getOrderId()) + ";" + order.getUser().getLogin() + ";" + order.paymentMethod + ";" + order.deliveryMethod + "\n");
+                writer.write(String.valueOf(order.getOrderId()) + ";" + currentUser.getLogin() + ";" + order.paymentMethod + ";" + order.deliveryMethod + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -257,7 +263,6 @@ public class DataManager {
         return orders;
     }
 
-
     public void setCurrentUser(User user) {
         currentUser = user;
     }
@@ -289,5 +294,20 @@ public class DataManager {
         alert.setHeaderText(null);
         alert.setContentText(wiadomosc);
         alert.showAndWait();
+    }
+    public Product setCurrentProduct (User currentuser, Label label) {
+        for (Product product : currentuser.cart.getProducts()) {
+            if (product.getName().equals(label.getText())) {
+                currentproduct = product;
+                break;
+            }
+        }
+        return currentproduct;
+    }
+    public void addOrder(Order order){
+        orders.add(order);
+    }
+    public ObservableList<Order> shareOrderList(){
+        return orders;
     }
 }

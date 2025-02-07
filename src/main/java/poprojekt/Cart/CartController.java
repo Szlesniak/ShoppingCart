@@ -16,10 +16,13 @@ import klasy.Order;
 import klasy.Product;
 import klasy.User;
 
+import java.util.Iterator;
+
 public class CartController {
     String paymentMethod;
     String deliveryMethod;
     UserController userController;
+
     @FXML
     private ComboBox<String> platnosc;
     @FXML
@@ -41,12 +44,23 @@ public class CartController {
     DataManager dataManager = DataManager.getInstance();
 
     private static ObservableList<Product> productsList = FXCollections.observableArrayList();
+    private static ObservableList<Order> orders = FXCollections.observableArrayList();
 
     public void initialize() {
         platnosc.getItems().addAll(paymentMethod1, paymentMethod2, paymentMethod3);
         dostawa.getItems().addAll(deliveryMethod1, deliveryMethod2, deliveryMethod3);
         currentuser = dataManager.getCurrentUser();
         productsList = currentuser.cart.getProducts();
+        Iterator<Product> iterator = productsList.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getAmount() < currentuser.cart.getProds().get(product)) {
+                iterator.remove();
+                currentuser.cart.getProds().put(product,0);
+                currentuser.cart.removeProduct(product);
+                dataManager.wiadomosc("Produkt o nazwie " + product.getName()+ " został usunięty, ponieważ jego dostępna ilość była mniejsza niż ilość w koszyku!");
+            }
+        }
         refresh();
         if (currentuser.cart.getProducts().isEmpty()) {
             Clear.setDisable(true);
@@ -66,9 +80,10 @@ public class CartController {
 
             SzablonKoszController controller = loader.getController();
             controller.setMainController(this);
+            controller.setCurrentuser(currentuser);
             controller.setRoot(productNode);
 
-            controller.setProductData(product.getName(), currentuser.cart.getIloscCart(product), product.getPrice(), product.getPhoto());
+            controller.setProductData(product.getName(),currentuser.cart.getIloscCart(product), product.getPrice(), product.getPhoto());
 
             contentBox.getChildren().add(productNode);
         } catch (Exception e) {
@@ -79,14 +94,20 @@ public class CartController {
     public void order() {
         setDeliveryMethod();
         setPaymentMethod();
-        Order order = new Order(currentuser.getOrders().size() + 1, currentuser, paymentMethod, deliveryMethod);
-        String workingDir = System.getProperty("user.dir");
-        String PdfPath = workingDir + "/Zamówienie";
-        order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
-        currentuser.getOrders().add(order);
-        order.finalizeOrder();
-        dataManager.wiadomosc("Zamówienie złożone!");
-        clearcart();
+        if (paymentMethod != null && deliveryMethod != null) {
+            Order order = new Order(dataManager.shareOrderList().size() + 1, paymentMethod, deliveryMethod);
+            orders.add(order);
+            dataManager.addOrder(order);
+            dataManager.saveOrdersToCSV(orders);
+            order.setUser(currentuser);
+            String workingDir = System.getProperty("user.dir");
+            String PdfPath = workingDir + "/Zamówienie";
+            order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
+            dataManager.shareOrderList().add(order);
+            order.finalizeOrder();
+            dataManager.saveProductsToCSV(dataManager.shareProductList());
+            refresh();
+        }
     }
 
     public void clearcart() {
@@ -118,12 +139,20 @@ public class CartController {
 
     public void setPaymentMethod() {
         paymentMethod = platnosc.getSelectionModel().getSelectedItem();
-        currentuser.cart.setPaymentMethod(paymentMethod);
+        if(paymentMethod == null) {
+            dataManager.wiadomosc("Prosze wybrać metode płatności!");
+        } else {
+            currentuser.cart.setPaymentMethod(paymentMethod);
+        }
     }
 
     public void setDeliveryMethod() {
         deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
-        currentuser.cart.setDeliveryMethod(deliveryMethod);
+        if(deliveryMethod == null) {
+            dataManager.wiadomosc("Prosze wybrać metode dostawy!");
+        } else {
+            currentuser.cart.setDeliveryMethod(deliveryMethod);
+        }
     }
 
     public void cancel(ActionEvent event) {

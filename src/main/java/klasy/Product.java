@@ -16,6 +16,7 @@ public class Product {
         this.description = description;
         this.photo = photo;
     }
+    public Product(){};
     public int getId() {
         return id;
     }
@@ -36,9 +37,6 @@ public class Product {
     }
     public double getTotalPrice() {
         return price;
-    }
-    public void subAmount(int amount) {
-        this.amount -= amount;
     }
     public void setId(int id) {
         this.id = id;
@@ -74,4 +72,7 @@ public class Product {
         return sold * price;
     }
 
+    public void setSold(int amount){
+        this.sold = this.sold + amount;
+    }
 }

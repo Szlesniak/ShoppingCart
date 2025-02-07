@@ -12,16 +12,15 @@ public class Cart {
     private HashMap<Product, Integer> prods = new HashMap<>();
     public void addProduct(Product product, int amount) {
         cartProducts.add(product);
-        prods.put(product,amount);
+        prods.put(product, amount);
     }
     public void removeProduct(Product product) {
         cartProducts.remove(product);
     }
     public void clearCart(){
-        for(Product product : cartProducts){
+        for (Product product : cartProducts) {
             prods.put(product,0);
         }
-        prods.clear();
         cartProducts.clear();
     }
     public ObservableList<Product> getProducts() {
@@ -30,23 +29,29 @@ public class Cart {
     public double getTotalPrice() {
         double totalPrice = 0;
         for (Product product : cartProducts) {
-            totalPrice += product.getTotalPrice();
+            totalPrice += product.getTotalPrice() * prods.get(product);
         }
         return totalPrice;
     }
+    public int getIloscCart(Product prod) {
+        return prods.getOrDefault(prod,0);
+    }
+
     public boolean isEmpty() {
         return cartProducts.isEmpty();
     }
-    public int getIloscCart(Product product){
-        return prods.getOrDefault(product,0);
+
+    public HashMap<Product, Integer> getProds() {
+        return prods;
     }
+    public void setCartProducts(Product prod, int amount) {
+        prods.put(prod,amount);
+    }
+
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
     public void setDeliveryMethod(String deliveryMethod) {
         this.deliveryMethod = deliveryMethod;
-    }
-    public void setCartProducts(Product product,int amount) {
-        prods.put(product,amount);
     }
 }

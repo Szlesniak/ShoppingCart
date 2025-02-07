@@ -12,12 +12,14 @@ import klasy.DataManager;
 import klasy.Product;
 import klasy.User;
 
+import javax.security.auth.login.CredentialNotFoundException;
+
 public class SzablonKoszController {
     private CartController mainController;
     private Parent root;
     User currentuser;
     Cart currentcart;
-    Product currentproduct;
+    Product currentproduct = new Product();
     DataManager dataManager = DataManager.getInstance();
     ObservableList<Product> CartProductList = FXCollections.observableArrayList();
     int amount;
@@ -45,24 +47,29 @@ public class SzablonKoszController {
                     } else {
                         amount = Integer.parseInt(Delete.getText());
                     }
-                    currentuser.cart.setCartProducts(currentproduct,currentuser.cart.getIloscCart(currentproduct) - amount);
-                    Amount.setText(Integer.toString(currentuser.cart.getIloscCart(currentproduct)));
+                    currentcart.getProds().put(currentproduct, currentcart.getIloscCart(currentproduct) - amount);
+                    Amount.setText(Integer.toString(currentcart.getIloscCart(currentproduct)));
                     dataManager.wiadomosc("Usunięto z koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
+                    if (currentcart.getProds().get(currentproduct) <= 0 && mainController != null && root != null) {
+                        currentcart.removeProduct(currentproduct);
+                        mainController.removeTemplate(root);
+                    }
                 }
             }
-            if (currentuser.cart.getIloscCart(currentproduct) <= 0 && mainController != null && root != null) {
-                currentcart.removeProduct(currentproduct);
-                mainController.removeTemplate(root);
-            }
-            refresh();
             mainController.refresh();
+            update();
         }
     }
 
     public void initialize() {
         currentuser = dataManager.getCurrentUser();
+        CartProductList = currentuser.cart.getProducts();
         currentcart = currentuser.cart;
-        CartProductList = currentcart.getProducts();
+        currentproduct = dataManager.setCurrentProduct(currentuser, Name);
+        if(currentproduct==null){
+            currentproduct = currentcart.getProducts().getFirst();
+        }
+        update();
     }
 
     public void setProductData(String name, int amount, Double prize, String photo) {
@@ -72,17 +79,22 @@ public class SzablonKoszController {
         Photo.setImage(new javafx.scene.image.Image(photo));
     }
 
-    private void refresh() {
+    public void update() {
         Name.setText(currentproduct.getName());
-        Amount.setText(Integer.toString(currentuser.cart.getIloscCart(currentproduct)));
+        Amount.setText(Integer.toString(currentcart.getProds().get(currentproduct)));
         Prize.setText(Double.toString(currentproduct.getPrice()));
-    }
+}
 
-    public void setMainController(CartController mainController) {
-        this.mainController = mainController;
-    }
+public void setMainController(CartController mainController) {
+    this.mainController = mainController;
+}
 
-    public void setRoot(Parent root) {
-        this.root = root;
-    }
+public void setRoot(Parent root) {
+    this.root = root;
+}
+public void setCurrentuser(User currentuser){
+        this.currentuser = currentuser;
+        this.currentcart = currentuser.cart;
+        this.currentproduct = dataManager.setCurrentProduct(currentuser, Name);
+}
 }

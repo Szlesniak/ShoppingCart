@@ -6,7 +6,6 @@ public class Salesman extends Dane {
     String company_name;
     String NIP;
     ArrayList<Product> SalesmanProducts = new ArrayList<Product>();
-    ArrayList<Product> BoughtProducts = new ArrayList<Product>();
     public Salesman(String login,String password, String company_name, String NIP, String email, String phone, String miasto, String ulica, String nr_bud){
         this.password = password;
         this.phone = phone;
@@ -40,7 +39,7 @@ public class Salesman extends Dane {
     public double getTotalMoney(){
         double total = 0;
         for (Product product : SalesmanProducts){
-            total += product.getTotalPrice();
+            total += product.getTotalPrice() * product.getSold();
         }
         return total;
     }

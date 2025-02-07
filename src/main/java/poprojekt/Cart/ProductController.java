@@ -26,18 +26,34 @@ public class ProductController {
     private Button AddProduct;
 
     public void addProduct() {
-        if (name.getText().isEmpty() || prize.getText().isEmpty() || amount.getText().isEmpty() || description.getText().isEmpty() || photo.getText().isEmpty()) {
+        int Amount;
+        double Prize;
+        try {
+            Prize = Integer.parseInt(prize.getText());
+        } catch (Exception e) {
+            dataManager.wiadomosc("Wartosc przez ciebie wpisana nie jest liczbą!");
+            return;
+        }
+        if (prize.getText().isEmpty() || prize.getText() == null || Prize < 1) {
+            dataManager.wiadomosc("Wprowadzono nieprawidłową ilość!");
+        }
+        try {
+            Amount = Integer.parseInt(amount.getText());
+        } catch (Exception e) {
+            dataManager.wiadomosc("Wartosc przez ciebie wpisana nie jest liczbą!");
+            return;
+        }
+        if (amount.getText().isEmpty() || amount.getText() == null || Amount < 1) {
+            dataManager.wiadomosc("Wprowadzono nieprawidłową ilość!");
+        }
+        if (name.getText().isEmpty() || description.getText().isEmpty() || photo.getText().isEmpty()) {
             dataManager.wiadomosc("Wypełnij wszystkie pola!");
-        } else if (Double.parseDouble(prize.getText()) < 0 || Integer.parseInt(amount.getText()) < 0) {
-            dataManager.wiadomosc("Cena i ilość nie mogą być ujemne!");
-        } else if (Double.parseDouble(prize.getText()) == 0 || Integer.parseInt(amount.getText()) == 0) {
-            dataManager.wiadomosc("Cena i ilość nie mogą być równe 0!");
         } else if (description.getText().getBytes().length > 300) {
             dataManager.wiadomosc("Opis nie może być dłuższy niż 300 znaków!");
         } else if (ProductController.class.getResource("/" + photo.getText()) == null) {
             dataManager.wiadomosc("Nie ma takiego pliku!");
         } else if (SalesmanController.dataManager.shareProductList().isEmpty()) {
-            Product product = new Product(name.getText(), Double.parseDouble(prize.getText()), Integer.parseInt(amount.getText()), description.getText(), photo.getText());
+            Product product = new Product(name.getText(), Prize, Amount, description.getText(), photo.getText());
             SalesmanController.addProductToList(product);
             SalesmanController.refresh();
             AddProduct.getScene().getWindow().hide();
@@ -46,7 +62,7 @@ public class ProductController {
         } else if (checkName(name.getText())) {
             dataManager.wiadomosc("Produkt o takiej nazwie już istnieje!");
         } else {
-            Product product2 = new Product(name.getText(), Double.parseDouble(prize.getText()), Integer.parseInt(amount.getText()), description.getText(), photo.getText());
+            Product product2 = new Product(name.getText(), Prize, Amount, description.getText(), photo.getText());
             SalesmanController.addProductToList(product2);
             SalesmanController.refresh();
             AddProduct.getScene().getWindow().hide();
