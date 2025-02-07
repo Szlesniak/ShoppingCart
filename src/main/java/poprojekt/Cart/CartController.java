@@ -95,19 +95,20 @@ public class CartController {
     public void order() {
         setDeliveryMethod();
         setPaymentMethod();
-        Order order = new Order(dataManager.shareOrderList().size() + 1, paymentMethod, deliveryMethod);
-        orders.add(order);
-        dataManager.addOrder(order);
-        dataManager.saveOrdersToCSV(orders);
-
-        order.setUser(currentuser);
-        String workingDir = System.getProperty("user.dir");
-        String PdfPath = workingDir + "/Zamówienie";
-        order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
-        dataManager.shareOrderList().add(order);
-        order.finalizeOrder();
-        dataManager.wiadomosc("Zamówienie złożone!");
-        clearcart();
+        if (!paymentMethod.isEmpty() && !deliveryMethod.isEmpty()) {
+            Order order = new Order(dataManager.shareOrderList().size() + 1, paymentMethod, deliveryMethod);
+            orders.add(order);
+            dataManager.addOrder(order);
+            dataManager.saveOrdersToCSV(orders);
+            order.setUser(currentuser);
+            String workingDir = System.getProperty("user.dir");
+            String PdfPath = workingDir + "/Zamówienie";
+            order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
+            dataManager.shareOrderList().add(order);
+            order.finalizeOrder();
+            dataManager.wiadomosc("Zamówienie złożone!");
+            clearcart();
+        }
     }
 
     public void clearcart() {
@@ -139,12 +140,20 @@ public class CartController {
 
     public void setPaymentMethod() {
         paymentMethod = platnosc.getSelectionModel().getSelectedItem();
-        currentuser.cart.setPaymentMethod(paymentMethod);
+        if(paymentMethod.isEmpty()) {
+            dataManager.wiadomosc("Prosze wybrać metode płatności!");
+        } else {
+            currentuser.cart.setPaymentMethod(paymentMethod);
+        }
     }
 
     public void setDeliveryMethod() {
         deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
-        currentuser.cart.setDeliveryMethod(deliveryMethod);
+        if(deliveryMethod.isEmpty()) {
+            dataManager.wiadomosc("Prosze wybrać metode płatności!");
+        } else {
+            currentuser.cart.setDeliveryMethod(deliveryMethod);
+        }
     }
 
     public void cancel(ActionEvent event) {
