@@ -3,31 +3,53 @@ title Diagram Sekwencji dla Koszyka Zakupowego Online
 
 actor Salesman
 entity Gui
+entity DataManager
 entity DataBase
+
 
 ' Sprzedawca dodaje produkt do sklepu
 Salesman -> Gui : Dodanie produktu do sklepu
-Gui -> DataBase : Dodaj produkt do bazy
-DataBase -> Gui : Potwierdzenie dodania produktu
+Gui -> DataManager : Dodaj produkt do bazy
+DataManager -> DataBase : Dodaj produkt do bazy
+DataBase -> DataManager : Potwierdzenie dodania produktu
+DataManager -> Gui : Potwierdzenie dodania produktu
 Gui -> Salesman : Potwierdzenie dodania produktu
 
 ' Sprzedawca sprawdza przychody
-Salesman -> Gui : Sprawdzenie przychodów
-Gui -> DataBase : Pobierz dane o przychodach
-DataBase -> Gui : Lista przychodów
+loop Sprawdzenie przychodów
+    DataManager -> DataBase : Sprawdzenie przychodów
+    DataManager <- DataManager : aktualizacja przychodów
+    DataManager -> DataBase : Pobierz przychody
+    end
+DataBase -> DataManager : Lista przychodów
+DataManager -> Gui : Lista przychodów
 Gui -> Salesman : Wyświetl przychody
 
 ' Sprzedawca sprawdza ilość kupionych produktów
-Salesman -> Gui : Sprawdzenie ilości kupionych produktów
-Gui -> DataBase : Pobierz dane o ilości
-DataBase -> Gui : Ilość kupionych produktów
+loop Sprawdzenie ilości kupionych produktów
+    DataManager -> DataBase : Sprawdzenie kupionych produktów
+    DataManager <- DataManager : aktualizacja produktów
+    DataManager -> DataBase : Pobierz dane o ilości
+    end
+DataBase -> DataManager : Ilość kupionych produktów
+DataManager -> Gui : Ilość kupionych produktów
 Gui -> Salesman : Wyświetl ilość
 
 ' Sprzedawca uzupełnia zapasy
 Salesman -> Gui : Uzupełnienie zapasów produktu
-Gui -> DataBase : Zaktualizuj ilość produktów
-DataBase -> Gui : Potwierdzenie aktualizacji
+Gui -> DataManager : Zaktualizuj ilość produktów
+DataManager -> DataBase : Zaktualizuj ilość produktów
+DataBase -> DataManager : Potwierdzenie aktualizacji
+DataManager -> Gui : Potwierdzenie aktualizacji
 Gui -> Salesman : Potwierdzenie uzupełnienia zapasów
+
+Salesman -> Gui : Zmiana ceny produktu
+Gui -> DataManager : Zmień cenę produktu
+DataManager -> DataBase : Zaktualizuj cenę produktu
+DataBase -> DataManager : Potwierdzenie aktualizacji
+DataManager -> Gui : Potwierdzenie zmiany ceny
+Gui -> Salesman : Komunikat zmiany ceny
+
 
 @enduml
 
