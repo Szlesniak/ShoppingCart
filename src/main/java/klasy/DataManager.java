@@ -19,6 +19,7 @@ public class DataManager {
     private ObservableList<User> users;
     private ObservableList<Salesman> salesmen;
     private ObservableList<Product> productList;
+    private ObservableList<Order> orders;
     private User currentUser;
     private Salesman currentSalesman;
 
@@ -29,6 +30,8 @@ public class DataManager {
     File SalesmenFile = new File(SalesmenPath);
     String UsersPath = workingDir + "/Users.csv";
     File Users = new File(UsersPath);
+    String OrdersPath = workingDir + "/Zamówienia.csv";
+    File Orders = new File(OrdersPath);
 
 
     private DataManager() {
@@ -36,6 +39,7 @@ public class DataManager {
         users = loadUsersFromCSV();
         salesmen = loadSalesmenFromCSV();
         productList = loadProductsFromCSV();
+        orders = loadOrdersFromCSV();
     }
 
     public static DataManager getInstance() {
@@ -47,6 +51,9 @@ public class DataManager {
 
     public void addUser(User user) {
         users.add(user);
+    }
+    public void addOrder(Order order) {
+        orders.add(order);
     }
 
     public ObservableList<User> shareUserList() {
@@ -67,6 +74,9 @@ public class DataManager {
 
     public ObservableList<Product> shareProductList() {
         return productList;
+    }
+    public ObservableList<Order> shareOrderList() {
+        return orders;
     }
 
     public void saveProductsToCSV(List<Product> products) {
@@ -202,6 +212,51 @@ public class DataManager {
         }
         return usr;
     }
+    public void saveOrdersToCSV(List<Order> orders) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(Orders))) {
+            writer.write("Nazwa;Cena;Ilosc;Opis;Zdjecie;Login\n");
+            for (Order order : orders) {
+                writer.write(String.valueOf(order.getOrderId()) + ";" + order.getUser().getLogin() + ";" + order.paymentMethod + ";" + order.deliveryMethod + "\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public ObservableList<Order> loadOrdersFromCSV() {
+        ObservableList<Order> orders = FXCollections.observableArrayList();
+        Order order;
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(Orders, StandardCharsets.UTF_8));
+
+            String line;
+            boolean firstLine = true;
+
+            while ((line = reader.readLine()) != null) {
+                if (firstLine) {
+                    firstLine = false;
+                    continue;
+                }
+                String[] data = line.split(";");
+                int orderId = Integer.parseInt(data[0]);
+                String user = data[1];
+                String paymentMethod = data[2];
+                String deliveryMethod = data[3];
+
+                order = new Order(orderId, paymentMethod, deliveryMethod);
+                orders.add(order);
+
+                for (User P : users) {
+                    if (P.getLogin().equals(user)) {
+                        order.setUser(P);
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return orders;
+    }
+
 
     public void setCurrentUser(User user) {
         currentUser = user;
