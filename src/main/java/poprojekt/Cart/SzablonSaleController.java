@@ -15,6 +15,8 @@ public class SzablonSaleController {
     SalesmanController SalesmanController;
     Product currentproduct;
     ObservableList<Product> productsList = FXCollections.observableArrayList();
+    int amount;
+    double prize;
     @FXML
     private Label Name;
     @FXML
@@ -38,11 +40,20 @@ public class SzablonSaleController {
                 currentproduct = product;
             }
         }
-        currentproduct.setAmount(currentproduct.getAmount() + Integer.parseInt(Dodaj.getText()));
-        dataManager.saveProductsToCSV(productsList);
-        dataManager.wiadomosc("Dodano: " + Dodaj.getText() + " sztuk\n Produktu: " + currentproduct.getName());
-
-        refresh();
+        try {
+            amount = Integer.parseInt(Dodaj.getText());
+        } catch (Exception e) {
+            dataManager.wiadomosc("Wartosc przez ciebie wpisana nie jest liczbą!");
+            return;
+        }
+        if (Dodaj.getText().isEmpty() || Dodaj.getText() == null || amount < 1) {
+            dataManager.wiadomosc("Wprowadzono nieprawidłową ilość!");
+        } else {
+            currentproduct.setAmount(currentproduct.getAmount() + amount);
+            dataManager.saveProductsToCSV(productsList);
+            dataManager.wiadomosc("Dodano: " + Dodaj.getText() + " sztuk\n Produktu: " + currentproduct.getName());
+            refresh();
+        }
     }
 
     public void zmien() {
@@ -51,10 +62,20 @@ public class SzablonSaleController {
                 currentproduct = product;
             }
         }
-        currentproduct.setPrice(Double.parseDouble(Zmien.getText()));
-        dataManager.saveProductsToCSV(productsList);
-        dataManager.wiadomosc("Zmieniono cenę produktu: " + currentproduct.getName() + " na: " + Zmien.getText());
-        refresh();
+        try {
+            prize = Integer.parseInt(Zmien.getText());
+        } catch (Exception e) {
+            dataManager.wiadomosc("Wartosc przez ciebie wpisana nie jest liczbą!");
+            return;
+        }
+        if (Zmien.getText().isEmpty() || Zmien.getText() == null || prize < 1) {
+            dataManager.wiadomosc("Wprowadzono nieprawidłową ilość!");
+        } else {
+            currentproduct.setPrice(prize);
+            dataManager.saveProductsToCSV(productsList);
+            dataManager.wiadomosc("Zmieniono cenę produktu: " + currentproduct.getName() + " na: " + Zmien.getText());
+            refresh();
+        }
     }
 
     public void setProductData(String name, Double cena, int amount, int soldamount, double soldprize, String photo) {

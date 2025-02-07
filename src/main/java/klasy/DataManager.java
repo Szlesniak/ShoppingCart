@@ -36,11 +36,22 @@ public class DataManager {
     File Orders = new File(OrdersPath);
 
     private DataManager() {
-
-        users = loadUsersFromCSV();
-        salesmen = loadSalesmenFromCSV();
-        productList = loadProductsFromCSV();
-        orders = loadOrdersFromCSV();
+        try {
+            users = loadUsersFromCSV();
+        } catch (Exception e){users = FXCollections.observableArrayList();}
+        try {
+            salesmen = loadSalesmenFromCSV();
+        } catch (Exception e){
+            salesmen = FXCollections.observableArrayList();
+        }
+        try {
+            productList = loadProductsFromCSV();
+        } catch (Exception e) {productList = FXCollections.observableArrayList();}
+        try {
+            orders = loadOrdersFromCSV();
+        } catch (Exception e) {
+            orders = FXCollections.observableArrayList();
+        }
     }
 
     public static DataManager getInstance() {
@@ -211,7 +222,7 @@ public class DataManager {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(Orders))) {
             writer.write("Nazwa;Cena;Ilosc;Opis;Zdjecie;Login\n");
             for (Order order : orders) {
-                writer.write(String.valueOf(order.getOrderId()) + ";" + order.getUser().getLogin() + ";" + order.paymentMethod + ";" + order.deliveryMethod + "\n");
+                writer.write(String.valueOf(order.getOrderId()) + ";" + currentUser.getLogin() + ";" + order.paymentMethod + ";" + order.deliveryMethod + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();

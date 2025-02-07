@@ -59,7 +59,7 @@ public class CartController {
                 iterator.remove();
                 currentuser.cart.getProds().put(product,0);
                 currentuser.cart.removeProduct(product);
-                dataManager.wiadomosc("Produkt został usunięty, ponieważ jego dostępna ilość była mniejsza niż ilość w koszyku!");
+                dataManager.wiadomosc("Produkt o nazwie " + product.getName()+ " został usunięty, ponieważ jego dostępna ilość była mniejsza niż ilość w koszyku!");
             }
         }
         refresh();
@@ -95,7 +95,7 @@ public class CartController {
     public void order() {
         setDeliveryMethod();
         setPaymentMethod();
-        if (!paymentMethod.isEmpty() && !deliveryMethod.isEmpty()) {
+        if (paymentMethod != null && deliveryMethod != null) {
             Order order = new Order(dataManager.shareOrderList().size() + 1, paymentMethod, deliveryMethod);
             orders.add(order);
             dataManager.addOrder(order);
@@ -106,8 +106,8 @@ public class CartController {
             order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
             dataManager.shareOrderList().add(order);
             order.finalizeOrder();
-            dataManager.wiadomosc("Zamówienie złożone!");
-            clearcart();
+            dataManager.saveProductsToCSV(dataManager.shareProductList());
+            refresh();
         }
     }
 
@@ -140,7 +140,7 @@ public class CartController {
 
     public void setPaymentMethod() {
         paymentMethod = platnosc.getSelectionModel().getSelectedItem();
-        if(paymentMethod.isEmpty()) {
+        if(paymentMethod == null) {
             dataManager.wiadomosc("Prosze wybrać metode płatności!");
         } else {
             currentuser.cart.setPaymentMethod(paymentMethod);
@@ -149,8 +149,8 @@ public class CartController {
 
     public void setDeliveryMethod() {
         deliveryMethod = dostawa.getSelectionModel().getSelectedItem();
-        if(deliveryMethod.isEmpty()) {
-            dataManager.wiadomosc("Prosze wybrać metode płatności!");
+        if(deliveryMethod == null) {
+            dataManager.wiadomosc("Prosze wybrać metode dostawy!");
         } else {
             currentuser.cart.setDeliveryMethod(deliveryMethod);
         }
