@@ -102,7 +102,6 @@ public class CartController {
             String workingDir = System.getProperty("user.dir");
             String PdfPath = workingDir + "/Zamówienie";
             order.createOrderPdf(PdfPath + order.getOrderId() + ".pdf", order);
-            dataManager.shareOrderList().add(order);
             order.finalizeOrder();
             dataManager.saveProductsToCSV(dataManager.shareProductList());
             refresh();
