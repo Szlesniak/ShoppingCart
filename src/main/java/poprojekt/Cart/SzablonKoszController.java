@@ -110,6 +110,9 @@ public class SzablonKoszController {
 
     public void update() {
         Name.setText(currentproduct.getName());
+        if (currentcart == null){
+            currentcart = currentuser.cart;
+        }
         Amount.setText(Integer.toString(currentcart.getProds().get(currentproduct)));
         Prize.setText(Double.toString(currentproduct.getPrice()));
 }
