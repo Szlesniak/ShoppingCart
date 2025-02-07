@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 import java.io.*;
@@ -21,6 +22,7 @@ public class DataManager {
     private ObservableList<Product> productList;
     private User currentUser;
     private Salesman currentSalesman;
+    Product currentproduct;
 
     String workingDir = System.getProperty("user.dir");
     String ProduktyPath = workingDir + "/Produkty.csv";
@@ -234,5 +236,14 @@ public class DataManager {
         alert.setHeaderText(null);
         alert.setContentText(wiadomosc);
         alert.showAndWait();
+    }
+    public Product setCurrentProduct (User currentuser, Label label) {
+        for (Product product : currentuser.cart.getProducts()) {
+            if (product.getName().equals(label.getText())) {
+                currentproduct = product;
+                break;
+            }
+        }
+        return currentproduct;
     }
 }

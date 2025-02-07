@@ -42,10 +42,15 @@ public class SzablonController {
             }
         }
         refresh();
-        if (Amount.getText().isEmpty() || Amount.getText() == null || Integer.parseInt(Amount.getText()) < 1) {
+        try {
+            amount = Integer.parseInt(Amount.getText());
+        } catch (Exception e) {
+            dataManager.wiadomosc("Wartosc przez ciebie wpisana nie jest liczbą!");
+            return;
+        }
+        if (Amount.getText().isEmpty() || Amount.getText() == null || amount < 1) {
             dataManager.wiadomosc("Wprowadzono nieprawidłową ilość!");
         } else {
-            amount = Integer.parseInt(Amount.getText());
             if (availability < amount) {
                 dataManager.wiadomosc("Brak wystarczającej ilości produktu na magazynie!");
                 return;
@@ -61,7 +66,7 @@ public class SzablonController {
             } else {
                 for (Product products : currentuser.cart.getProducts()) {
                     if (products.getName().equals(currentproduct.getName())) {
-                        currentuser.cart.getProds().put(currentproduct, currentuser.cart.getProds().get(products) + amount);
+                        currentuser.cart.getProds().put(currentproduct, currentuser.cart.getIloscCart(products) + amount);
                         dataManager.wiadomosc("Dodano do koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
                         refresh();
                         return;
@@ -101,8 +106,12 @@ public class SzablonController {
         if (currentuser == null) {
             availability = currentproduct.getAmount();
         } else {
-            Availability.setText(Integer.toString(currentproduct.getAmount() - currentuser.cart.getProds().getOrDefault(currentproduct, 0)));
+            availability = Integer.parseInt(Integer.toString(currentproduct.getAmount() - currentuser.cart.getProds().getOrDefault(currentproduct, 0)));
+            if(currentproduct.getAmount() < currentuser.cart.getIloscCart(currentproduct)) {
+                Availability.setText("!!!");
+            } else {
+                Availability.setText(Integer.toString(currentproduct.getAmount() - currentuser.cart.getProds().getOrDefault(currentproduct, 0)));
+            }
         }
-        availability = Integer.parseInt(Availability.getText());
     }
 }

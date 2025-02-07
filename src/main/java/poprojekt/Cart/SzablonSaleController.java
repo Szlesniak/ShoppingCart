@@ -82,6 +82,9 @@ public class SzablonSaleController {
         }
         Cena.setText(Double.toString(currentproduct.getPrice()));
         Name.setText(currentproduct.getName());
+        if (currentproduct.getAmount() == 0) {
+            dataManager.wiadomosc("Produkt o nazwie: " + currentproduct.getName() + " się wyprzedał!" + "\nDodaj ilość tego produktu lub go usuń!");
+        }
         Amount.setText(Integer.toString(currentproduct.getAmount()));
         Soldamount.setText(Integer.toString(currentproduct.getSold()));
         Soldprize.setText(Double.toString(currentproduct.getSoldPrice()));

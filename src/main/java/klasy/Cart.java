@@ -18,6 +18,9 @@ public class Cart {
         cartProducts.remove(product);
     }
     public void clearCart(){
+        for (Product product : cartProducts) {
+            prods.put(product,0);
+        }
         cartProducts.clear();
     }
     public ObservableList<Product> getProducts() {
@@ -26,15 +29,23 @@ public class Cart {
     public double getTotalPrice() {
         double totalPrice = 0;
         for (Product product : cartProducts) {
-            totalPrice += product.getTotalPrice();
+            totalPrice += product.getTotalPrice() * prods.get(product);
         }
         return totalPrice;
     }
+    public int getIloscCart(Product prod) {
+        return prods.getOrDefault(prod,0);
+    }
+
+    public boolean isEmpty() {
+        return cartProducts.isEmpty();
+    }
+
     public HashMap<Product, Integer> getProds() {
         return prods;
     }
-    public boolean isEmpty() {
-        return cartProducts.isEmpty();
+    public void setCartProducts(Product prod, int amount) {
+        prods.put(prod,amount);
     }
 
     public void setPaymentMethod(String paymentMethod) {

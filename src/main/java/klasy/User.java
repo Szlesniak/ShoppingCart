@@ -31,7 +31,7 @@ public class User extends Dane {
     public String getName() {
         return name;
     }
-    public void setOrder(Order order) {
+    public void addOrder(Order order) {
         orders.add(order);
     }
     public ObservableList<Order> getOrders() {
