@@ -2,32 +2,64 @@
 title Diagram Sekwencji dla Koszyka Zakupowego Online
 
 actor User
+actor Salesman
 entity Gui
+entity DataManager
 entity DataBase
 
+
+' Użytkownik się rejestruje i loguje
+User -> Gui : Rejestracja konta, wprowadzenie danych osobowych
+Gui -> DataManager : Wprowadzone dane są przesyłane
+DataManager -> DataBase : aktualizuje baze
+DataBase <- DataBase : Tworzy konto Użytkownika
+DataBase -> Gui : Zwraca Użytkownika
+Gui -> User : Zmienia okienko na logowanie
+User -> Gui : Wprowadza dane logowania
+Gui -> DataManager : Wysyła dane logowania
+loop Sprawdza liste użytkowników
+    DataManager <- DataManager : dopasowuje dane do danych w bazie
+end
+DataManager -> Gui : Potwierza zalodowanie użytkownika
+Gui -> User : Zwraca strone zalogowanego użytkownika
+
 ' Użytkownik przegląda produkty
-User -> Gui : Wyświetlanie produktów
-Gui -> DataBase : Pobierz listę produktów
-DataBase -> Gui : Lista produktów
+User -> Gui : Wyświetlanie aktulanych produktów
+Gui -> DataManager : Pobierz listę produktów
+DataManager -> DataBase : odczytuje liste produktów
+DataBase -> Gui : Zwracanie Lista produktów
 Gui -> User : Wyświetl produkty
 
 ' Użytkownik wybiera produkt i dodaje do koszyka
-User -> Gui : Wybór produktów
-Gui -> DataBase : Zaktualizuj koszyk (dodanie)
-DataBase -> Gui : Potwierdzenie aktualizacji
+User -> Gui : WDodanie produktów lub zwiększenie/zmniejszenie ilości w koszyku oraz usuwanie produktu
+Gui -> DataManager : Zaktualizuj koszyk (dodanie)
+DataManager -> DataBase : pobierz ilosc produktów
+group Aktualizowanie ilosci produktów
+DataManager -> DataBase : wysyła ilosc wybranych produktów
+DataBase <- DataBase : Aktualizuje dostępną ilosć produktów dla danego użytkownika
+DataBase -> Gui : Zwraca aktualną ilosc produktów
+Gui <- Gui : Zmienia wyświetlaną ilosć produktów
+Gui <- Gui : Aktualizuje liczbę produktów w koszyku
+end
+DataManager -> Gui : Potwierdzenie aktualizacji
 Gui -> User : Potwierdzenie dodania do koszyka
-
-' Użytkownik wprowadza dane osobowe
-User -> Gui : Wprowadzenie danych osobowych
-Gui -> DataBase : Zapisz dane osobowe
-DataBase -> Gui : Potwierdzenie zapisu
-Gui -> User : Potwierdzenie zapisania danych
 
 ' Użytkownik wybiera sposób dostawy i płatności
 User -> Gui : Wybór metody dostawy i płatności
-Gui -> DataBase : Zapisz metodę dostawy i płatności
-DataBase -> Gui : Potwierdzenie zapisu
+Gui -> DataManager : Zapisz metodę dostawy i płatności
+DataManager -> DataBase : wysyłą wybrane metody do bazy
+DataBase -> DataManager : poteirdzenie wybranych metody
+DataManager -> Gui : Potwierdzenie zapisu
 Gui -> User : Potwierdzenie wyboru
+
+'Użytkownik składa zamówienie
+User -> Gui : Zamów
+Gui -> DataManager : zamówienie zostało złożone
+DataManager <- DataManager : tworzy faktury z zamówieniem
+DataManager -> DataBase : wysyła zamówienie
+DataManager -> DataBase : wysyła aktualizaje produktu
+DataBase -> Gui : zwraca potwierzenia
+DataManager -> Salesman : aktualizuje ilosc produktów oraz produktów kupionych
 
 @enduml
 
