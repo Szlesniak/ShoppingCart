@@ -96,7 +96,6 @@ public class CartController {
         setPaymentMethod();
         if (paymentMethod != null && deliveryMethod != null) {
             Order order = new Order(dataManager.shareOrderList().size() + 1, paymentMethod, deliveryMethod);
-            orders.add(order);
             dataManager.addOrder(order);
             dataManager.saveOrdersToCSV(orders);
             order.setUser(currentuser);
