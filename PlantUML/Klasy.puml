@@ -1,61 +1,135 @@
 @startuml
-title Diagram Klas dla Koszyka Zakupowego Online
+title Diagram Klas
 
 class Product {
-  +String name
-  +String description
-  +float price
-  +int stock
-  +addProduct()
-  +updateStock()
+     +private int id;
+     +public String name;
+     +private double price;
+     +private int amount = 0;
+     +private String description;
+     +private String photo;
+     +private Salesman salesman;
+     +public int sold = 0;
+     +public void decreaseStock(int amount)
+     +public void setSalesman(Salesman salesman)
+     +void setPrice(Double newprice)
 }
+    class DataManager {
+      -static DataManager instace
+      -ObservableList<User> users
+      -ObservableList<Salesman> salesmen
+      -ObservableList<Product> productList
+      -ObservableList<Order> orders
+      -User currentUser
+      -Salesman currentSalesman
+      -Product currentproduct
+      -String workingDir
+      -String ProduktyPath
+      -File Produkty
+      -String SalesmenPath
+      -File SalesmenFile
+      -String UsersPath
+      -File Users
+      -String OrdersPath
+      -File Orders
+      +static DataManager getInstance()
+      +void addUser(User user)
+      +ObservableList<User> shareUserList()
+      +void addSalesman(Salesman salesman)
+      +ObservableList<Salesman> shareSalesmanList()
+      +void addProduct(Product product)
+      +ObservableList<Product> shareProductList()
+      +void saveProductsToCSV(List<Product> products)
+      +ObservableList<Product> loadProductsFromCSV()
+      +void saveSalesmenToCSV()
+      +ObservableList<Salesman> loadSalesmenFromCSV()
+      +void saveUsersToCSV()
+      +ObservableList<User> loadUsersFromCSV()
+      +void saveOrdersToCSV(List<Order> orders)
+      +ObservableList<Order> loadOrdersFromCSV()
+      +void setCurrentUser(User user)
+      +void setCurrentSalesman(Salesman salesman)
+      +void changeScene(ActionEvent event, String fxmlFile)
+      +void wiadomosc(String wiadomosc)
+      +Product setCurrentProduct(User currentuser, Label label)
+      +void addOrder(Order order)
+      +ObservableList<Order> shareOrderList()
+    }
 
 class User {
-  +String name
-  +String email
-  +String address
+  +private String name;
+  +private String surname;
+  +private ObservableList<Order> orders;
   +Cart cart
   +Order order
-  +addToCart(product: Product)
-  +removeFromCart(product: Product)
-  +checkout()
+  +addOrder(Order order)
 }
 
 class Cart {
-  +List<Product> products
-  +float totalPrice()
-  +addProduct(product: Product)
-  +removeProduct(product: Product)
+  -ObservableList<Product> cartProducts
+  -String paymentMethod
+  -String deliveryMethod
+  -HashMap<Product, Integer> prods
+  +void addProduct(Product product, int amount)
+  +void removeProduct(Product product)
+  +void clearCart()
+  +ObservableList<Product> getProducts()
+  +double getTotalPrice()
+  +int getIloscCart(Product prod)
+  +boolean isEmpty()
+  +HashMap<Product, Integer> getProds()
+  +void setCartProducts(Product prod, int amount)
+  +void setPaymentMethod(String paymentMethod)
+  +void setDeliveryMethod(String deliveryMethod)
 }
 
 class Order {
-  +String deliveryMethod
+  +int orderID
+  +User user
   +String paymentMethod
-  +float totalAmount
-  +placeOrder()
-  +updateStatus()
+  +String deliveryMethod
+  +Order(int orderID, String paymentMethod, String deliveryMethod)
+  +void finalizeOrder()
+  +void setPDFpath(String path)
+  +void setUser(User user)
+  +void createOrderPdf(String filePath, Order order)
+  +void wiadomosc(String wiadomosc)
 }
 
 class Salesman {
-  +String name
-  +String employeeId
-  +addProduct(product: Product)
-  +updateProductStock(product: Product, amount: int)
-  +viewSales()
-  +viewPurchasedItems()
+  +String company_name
+  +String NIP
+  +ArrayList<Product> SalesmanProducts
+  +void addProduct(Product product)
+  +String getLogin()
+  +String getPassword()
+  +ArrayList<Product> getSalesmanProducts()
+  +int getTotalSold()
+  +double getTotalMoney()
+  +String getCompany_name()
+  +String getNIP()
+}
+class Dane {
+    +String login;
+    +String password;
+    +String miasto;
+    +String ulica;
+    +String nr_bud;
+    +String email;
+    +String phone;
+    +String getNr_bud()
+    +String getPhone()
+    +String getEmail()
 }
 
-Interface Listener {
-    +addListener()
-    +deleteListener()
-    +notifyListener()
-}
 
-Product --> Cart : contains
-Cart --> User : owned by
-User --> Order : creates
-Salesman --> Product : manages
-Listener --> Cart : supervises
-Listener --> Product : supervises
+Order --|> Cart
+Salesman --|> Dane
+User --|> Dane
+
+
+
+
+
 
 @enduml

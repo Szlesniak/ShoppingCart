@@ -5,7 +5,8 @@ skinparam actorStyle awesome
 
 actor "USER" as User
 actor "SALESMAN" as Salesman
-actor "LISTENER" as Listener
+entity "DATAMANAGER" as datamanager
+actor "USERNULL" as usernull
 
 left to right direction
 
@@ -13,20 +14,40 @@ rectangle "Koszyk Zakupowy Online" {
   User --> (Przeglądanie sklepu)
   User --> (Wybieranie produktów)
   User --> (Wprowadzanie danych osobowych)
+  User --> (Dodawanie produktów do koszyka)
+  User --> (Zwiększanie/zmniejszanie wybranej ilości produktów oraz możliwość usunięcia wybranego produktu w koszyku)
   User --> (Wybór sposobu dostawy i płatności)
+  User --> (Czyszczenie całego koszyka)
+  User --> (Składanie zamówienia oraz otrzymywanie faktóry)
 }
+User --> (Logowanie/Wylogowywanie)
+User --> (Rejestracja konta)
+Salesman --> (Rejestracja konta)
+Salesman --> (Logowanie/Wylogowywanie)
 
 rectangle "Sprzedawca" {
-  Salesman --> (Dodawanie produktów)
+  Salesman --> (Dodawanie/Usuwanie produktów)
+  Salesman --> (Sprawdzanie ilości własnego produktu)
+  Salesman --> (Zwiększanie zasobu wybranego własnego produktu)
+  Salesman --> (Przedlądanie własnych produktów)
   Salesman --> (Sprawdzanie przychodu)
-  Salesman --> (Ilość kupionych przedmiotów)
-  Salesman --> (Uzupełnianie ilości)
+  Salesman --> (Sprawdzanie ilości sprzedanych produktów)
+  Salesman --> (Sprawdzanie ilosci unikalnych produktów)
 }
 
-rectangle "LISTERNER" {
-  Listener --> (Aktualizuje koszyk)
-  Listener --> (Aktualizuje produkty)
-  Listener --> (Update GUI)
+rectangle "DATAMANAGER" {
+  datamanager --> (Zarządzanie danymi)
+  datamanager --> (Aktualizuje liste wszystkich produktów)
+  datamanager --> (Aktualizuje liste pracowników,użytkowników oraz zamówień)
+  datamanager --> (Wyświetlanie komunikatów)
+  datamanager --> (Zmiana wyświetlanych okienek/stron)
+  datamanager --> (Aktualizuje na bierząco baze danych)
+  datamanager --> (Zwraca aktualnego użytkownika/sprzedawce/wybrany produkt)
 }
+
+rectangle "USERNULL" {
+    usernull --> (Przeglądnie sklepu)
+}
+
 
 @enduml

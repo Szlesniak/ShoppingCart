@@ -1,7 +1,6 @@
 package klasy;
 
 public class Product {
-    private int id;
     public String name;
     private double price;
     private int amount = 0;
@@ -17,9 +16,6 @@ public class Product {
         this.photo = photo;
     }
     public Product(){};
-    public int getId() {
-        return id;
-    }
     public String getName() {
         return name;
     }
@@ -37,9 +33,6 @@ public class Product {
     }
     public double getTotalPrice() {
         return price;
-    }
-    public void setId(int id) {
-        this.id = id;
     }
     public String getDescription() {
         return description;

@@ -13,6 +13,7 @@ import klasy.Product;
 import klasy.User;
 
 import javax.security.auth.login.CredentialNotFoundException;
+import java.util.Iterator;
 
 public class SzablonKoszController {
     private CartController mainController;
@@ -37,29 +38,57 @@ public class SzablonKoszController {
     public void delete() {
         if (CartProductList.isEmpty()) {
             dataManager.wiadomosc("Koszyk jest pusty!");
-        } else {
-            for (Product product : CartProductList) {
-                if (product.getName().equals(Name.getText())) {
-                    currentproduct = product;
-                    if (Delete.getText().isEmpty() || Delete.getText() == null || Delete.getText().equals("0")) {
-                        dataManager.wiadomosc("Podaj ilość!");
-                        return;
-                    } else {
-                        amount = Integer.parseInt(Delete.getText());
-                    }
-                    currentcart.getProds().put(currentproduct, currentcart.getIloscCart(currentproduct) - amount);
-                    Amount.setText(Integer.toString(currentcart.getIloscCart(currentproduct)));
-                    dataManager.wiadomosc("Usunięto z koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
-                    if (currentcart.getProds().get(currentproduct) <= 0 && mainController != null && root != null) {
-                        currentcart.removeProduct(currentproduct);
+            return;
+        }
+
+        Iterator<Product> iterator = CartProductList.iterator();
+        boolean found = false;
+
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+
+            if (product.getName().equals(Name.getText())) {
+                found = true;
+                currentproduct = product;
+
+                if (Delete.getText().isEmpty() || Delete.getText().equals("0")) {
+                    dataManager.wiadomosc("Podaj ilość!");
+                    return;
+                }
+
+                try {
+                    amount = Integer.parseInt(Delete.getText());
+                } catch (NumberFormatException e) {
+                    dataManager.wiadomosc("Błąd: Ilość musi być liczbą całkowitą!");
+                    return;
+                }
+
+                // Aktualizacja ilości w koszyku
+                currentcart.getProds().put(currentproduct, currentcart.getIloscCart(currentproduct) - amount);
+                Amount.setText(Integer.toString(currentcart.getIloscCart(currentproduct)));
+
+                dataManager.wiadomosc("Usunięto z koszyka: " + currentproduct.getName() + "\nW ilości: " + amount);
+
+                // Jeśli ilość <= 0, usuń produkt z koszyka i interfejsu
+                if (currentcart.getProds().get(currentproduct) <= 0) {
+                    iterator.remove(); // Bezpieczne usunięcie z listy
+                    currentcart.removeProduct(currentproduct);
+
+                    if (mainController != null && root != null) {
                         mainController.removeTemplate(root);
                     }
                 }
             }
-            mainController.refresh();
-            update();
         }
+
+        if (!found) {
+            dataManager.wiadomosc("Produkt nie został znaleziony w koszyku!");
+        }
+
+        mainController.refresh();
+        update();
     }
+
 
     public void initialize() {
         currentuser = dataManager.getCurrentUser();
@@ -81,6 +110,9 @@ public class SzablonKoszController {
 
     public void update() {
         Name.setText(currentproduct.getName());
+        if (currentcart == null){
+            currentcart = currentuser.cart;
+        }
         Amount.setText(Integer.toString(currentcart.getProds().get(currentproduct)));
         Prize.setText(Double.toString(currentproduct.getPrice()));
 }
